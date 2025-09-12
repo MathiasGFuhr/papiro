@@ -1,0 +1,3 @@
+[33ma754210[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Fix logo loading issues - add priority and unoptimized props
+[33mec15e30[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix TypeScript error in Analytics.tsx - replace any with proper interface
+[33m6e5d061[m Fix README.md formatting and remove duplicate content
