@@ -51,6 +51,7 @@ export const PRICING_PLANS = [
       'Relatórios básicos',
       'Suporte por email'
     ],
+    isPopular: false,
     buttonText: 'Começar Agora',
     buttonVariant: 'secondary' as const
   },
@@ -81,6 +82,7 @@ export const PRICING_PLANS = [
       'Grupo VIP no WhatsApp',
       'Acesso antecipado a recursos'
     ],
+    isPopular: false,
     buttonText: 'Escolher Premium',
     buttonVariant: 'secondary' as const
   }
