@@ -42,22 +42,22 @@ export const FEATURES = [
 
 export const PRICING_PLANS = [
   {
-    name: 'Básico',
-    price: 'R$ 29',
-    period: '/mês',
+    name: 'Gratuito',
+    price: 'R$ 0',
+    period: '',
     features: [
-      'Cronograma automático',
-      'Até 2 concursos',
-      'Relatórios básicos',
+      'Cronograma básico',
+      '1 concurso',
+      'Relatórios simples',
       'Suporte por email'
     ],
     isPopular: false,
-    buttonText: 'Começar Agora',
-    buttonVariant: 'secondary' as const
+    buttonText: 'Começar Grátis',
+    buttonVariant: 'outline' as const
   },
   {
-    name: 'Profissional',
-    price: 'R$ 49',
+    name: 'Mensal',
+    price: 'R$ 9,90',
     period: '/mês',
     features: [
       'Cronograma automático',
@@ -72,18 +72,19 @@ export const PRICING_PLANS = [
     buttonVariant: 'primary' as const
   },
   {
-    name: 'Premium',
-    price: 'R$ 79',
-    period: '/mês',
+    name: 'Vitalício',
+    price: 'R$ 199',
+    period: 'único',
     features: [
-      'Tudo do Profissional',
-      'Mentoria personalizada',
-      'Simulados exclusivos',
-      'Grupo VIP no WhatsApp',
-      'Acesso antecipado a recursos'
+      'Tudo do Mensal',
+      'Acesso vitalício',
+      'Atualizações gratuitas',
+      'Suporte premium',
+      'Recursos exclusivos',
+      'Sem renovação'
     ],
     isPopular: false,
-    buttonText: 'Escolher Premium',
+    buttonText: 'Escolher Vitalício',
     buttonVariant: 'secondary' as const
   }
 ] as const;
