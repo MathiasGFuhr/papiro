@@ -1,20 +1,14 @@
 import Link from "next/link";
-import Image from "next/image";
+import { LogoIcon } from "../components";
 
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
       <div className="text-center">
         <div className="mb-8">
-          <Image
-            src="/imagens/logo-policia.png"
-            alt="Logo Papiro Tático"
-            width={120}
-            height={120}
-            className="mx-auto opacity-50"
-            priority
-            unoptimized
-          />
+          <div className="flex justify-center opacity-50">
+            <LogoIcon size={120} />
+          </div>
         </div>
         
         <h1 className="text-9xl font-bold text-red-600 mb-4">404</h1>

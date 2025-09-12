@@ -63,9 +63,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/imagens/logo-policia.png",
-    shortcut: "/imagens/logo-policia.png",
-    apple: "/imagens/logo-policia.png",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
 
@@ -77,9 +77,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/imagens/logo-policia.png" type="image/png" />
-        <link rel="shortcut icon" href="/imagens/logo-policia.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/imagens/logo-policia.png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}

@@ -1,6 +1,7 @@
 // UI Components
 export { Button } from './ui/Button';
 export { Logo } from './ui/Logo';
+export { LogoIcon } from './ui/LogoIcon';
 export { ScrollProgress } from './ui/ScrollProgress';
 export { BackToTop } from './ui/BackToTop';
 
