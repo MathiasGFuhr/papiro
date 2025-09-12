@@ -16,6 +16,10 @@ export { PricingSection } from './sections/PricingSection';
 export { HowItWorksSection } from './sections/HowItWorksSection';
 export { ContactSection } from './sections/ContactSection';
 
+// Auth Components
+export { LoginForm } from './auth/LoginForm';
+export { RegisterForm } from './auth/RegisterForm';
+
 // Analytics
 export { default as Analytics } from './Analytics';
 export { trackEvent, trackButtonClick, trackFormSubmit, trackPageView } from './Analytics';

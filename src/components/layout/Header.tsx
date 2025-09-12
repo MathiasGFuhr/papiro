@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
 import { NAVIGATION_ITEMS } from '../../constants';
@@ -35,12 +36,16 @@ export const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              Entrar
-            </Button>
-            <Button size="sm">
-              Começar Grátis
-            </Button>
+            <Link href="/login">
+              <Button variant="outline" size="sm">
+                Entrar
+              </Button>
+            </Link>
+            <Link href="/cadastro">
+              <Button size="sm">
+                Começar Grátis
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -89,12 +94,16 @@ export const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" size="sm" className="w-full">
-                  Entrar
-                </Button>
-                <Button size="sm" className="w-full">
-                  Começar Grátis
-                </Button>
+                <Link href="/login" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full">
+                    Entrar
+                  </Button>
+                </Link>
+                <Link href="/cadastro" className="w-full">
+                  <Button size="sm" className="w-full">
+                    Começar Grátis
+                  </Button>
+                </Link>
               </div>
             </nav>
           </div>

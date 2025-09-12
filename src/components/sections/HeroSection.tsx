@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button } from '../ui/Button';
 
 export const HeroSection = () => {
@@ -13,12 +14,16 @@ export const HeroSection = () => {
             análise de progresso e foco estratégico para sua aprovação.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" className="w-full sm:w-auto">
-              Começar Grátis Agora
-            </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              Ver Demonstração
-            </Button>
+            <Link href="/cadastro">
+              <Button size="lg" className="w-full sm:w-auto">
+                Começar Grátis Agora
+              </Button>
+            </Link>
+            <Link href="/#como-funciona">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                Ver Demonstração
+              </Button>
+            </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
