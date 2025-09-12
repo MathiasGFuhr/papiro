@@ -6,8 +6,10 @@ import {
   ScrollProgress, 
   BackToTop,
   HeroSection,
+  HowItWorksSection,
   FeaturesSection,
   PricingSection,
+  ContactSection,
   Analytics
 } from '../components';
 import { useScroll } from '../hooks';
@@ -24,8 +26,10 @@ export default function Home() {
       
       <main>
         <HeroSection />
+        <HowItWorksSection />
         <FeaturesSection />
         <PricingSection />
+        <ContactSection />
       </main>
       
       <Footer />

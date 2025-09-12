@@ -12,6 +12,8 @@ export { Footer } from './layout/Footer';
 export { HeroSection } from './sections/HeroSection';
 export { FeaturesSection } from './sections/FeaturesSection';
 export { PricingSection } from './sections/PricingSection';
+export { HowItWorksSection } from './sections/HowItWorksSection';
+export { ContactSection } from './sections/ContactSection';
 
 // Analytics
 export { default as Analytics } from './Analytics';
