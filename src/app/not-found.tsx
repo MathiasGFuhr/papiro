@@ -12,6 +12,8 @@ export default function NotFound() {
             width={120}
             height={120}
             className="mx-auto opacity-50"
+            priority
+            unoptimized
           />
         </div>
         

@@ -115,6 +115,8 @@ export default function Home() {
                 width={60}
                 height={60}
                 className="object-contain"
+                priority
+                unoptimized
               />
               <h1 className="text-xl font-bold text-white">Papiro Tático</h1>
             </a>
@@ -993,6 +995,8 @@ export default function Home() {
                   width={32}
                   height={32}
                   className="object-contain"
+                  priority
+                  unoptimized
                 />
                 <h3 className="text-lg font-bold text-white">Papiro Tático</h3>
               </div>
