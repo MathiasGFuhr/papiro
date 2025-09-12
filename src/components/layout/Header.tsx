@@ -1,3 +1,5 @@
+"use client";
+
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
 import { NAVIGATION_ITEMS } from '../../constants';
