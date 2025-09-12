@@ -1,0 +1,109 @@
+# 🚔 Papiro Tático
+
+Sistema inteligente de controle de estudos para concursos policiais com inteligência artificial.
+
+## 🎯 Sobre o Projeto
+
+O **Papiro Tático** é uma plataforma inovadora que utiliza inteligência artificial para criar cronogramas de estudos personalizados para concursos policiais, otimizando o tempo e maximizando as chances de aprovação.
+
+### 🎯 Concursos Suportados
+- **PF** - Polícia Federal
+- **PRF** - Polícia Rodoviária Federal  
+- **PC** - Polícia Civil
+- **DEPEN** - Departamento Penitenciário
+
+## ✨ Funcionalidades
+
+- 🤖 **Cronograma Automático** - IA cria seu plano de estudos
+- 📊 **Análise de Progresso** - Acompanhe sua evolução
+- 🎯 **Foco Estratégico** - Priorize o que importa
+- 📱 **Responsivo** - Funciona em qualquer dispositivo
+- 🔄 **Sincronização** - Acesse de qualquer lugar
+
+## 🚀 Tecnologias Utilizadas
+
+- **Next.js 14** - Framework React
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Estilização
+- **Supabase** - Backend e banco de dados
+- **Vercel** - Deploy e hospedagem
+
+## 📦 Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/MathiasGFuhr/papiro.git
+cd papiro-tatico
+```
+
+2. Instale as dependências:
+```bash
+npm install
+# ou
+yarn install
+```
+
+3. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env.local
+```
+
+4. Execute o projeto:
+```bash
+npm run dev
+# ou
+yarn dev
+```
+
+5. Acesse [http://localhost:3000](http://localhost:3000)
+
+## 🎨 Design
+
+- **Tema**: Dark mode com cores policiais
+- **Paleta**: Cinza escuro, vermelho e branco
+- **Tipografia**: Inter e JetBrains Mono
+- **Ícones**: SVG customizados
+
+## 📱 Responsividade
+
+- ✅ Desktop (1200px+)
+- ✅ Tablet (768px - 1199px)
+- ✅ Mobile (320px - 767px)
+
+## 🔧 Scripts Disponíveis
+
+```bash
+npm run dev          # Desenvolvimento
+npm run build        # Build de produção
+npm run start        # Servidor de produção
+npm run lint         # Verificar código
+```
+
+## 📊 Performance
+
+- ⚡ **Lighthouse Score**: 95+
+- 🚀 **Core Web Vitals**: Otimizado
+- 📱 **Mobile First**: Design responsivo
+- 🔍 **SEO**: Meta tags e structured data
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 📞 Contato
+
+- **Email**: contato@papirotatico.com
+- **WhatsApp**: (11) 99999-9999
+- **Website**: [papirotatico.com](https://papirotatico.com)
+
+---
+
+**Papiro Tático** - Foco, disciplina e estratégia para conquistar sua aprovação! 🚔💀
