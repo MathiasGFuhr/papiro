@@ -1,6 +1,9 @@
 import { Logo } from '../ui/Logo';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../../constants';
+<<<<<<< HEAD
 import Link from 'next/link';
+=======
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
 
 export const Footer = () => {
   return (
@@ -30,10 +33,17 @@ export const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Suporte</h3>
             <ul className="space-y-2">
+<<<<<<< HEAD
               <li><Link href="/ajuda" className="text-gray-400 hover:text-white transition-colors text-sm">Central de Ajuda</Link></li>
               <li><Link href="/ajuda/tutoriais" className="text-gray-400 hover:text-white transition-colors text-sm">Tutoriais</Link></li>
               <li><Link href="/ajuda/faq" className="text-gray-400 hover:text-white transition-colors text-sm">FAQ</Link></li>
               <li><Link href="/ajuda/status" className="text-gray-400 hover:text-white transition-colors text-sm">Status</Link></li>
+=======
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Central de Ajuda</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Tutoriais</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Status</a></li>
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
             </ul>
           </div>
 
@@ -74,9 +84,15 @@ export const Footer = () => {
               © 2024 Papiro Tático. Todos os direitos reservados.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
+<<<<<<< HEAD
               <Link href="/privacidade" className="text-gray-400 hover:text-white transition-colors text-sm">Privacidade</Link>
               <Link href="/termos" className="text-gray-400 hover:text-white transition-colors text-sm">Termos</Link>
               <Link href="/ajuda" className="text-gray-400 hover:text-white transition-colors text-sm">Ajuda</Link>
+=======
+              <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Privacidade</a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Termos</a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Cookies</a>
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
             </div>
           </div>
         </div>

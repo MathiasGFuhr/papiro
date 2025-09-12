@@ -1,10 +1,17 @@
 "use client";
 
+<<<<<<< HEAD
+=======
+import Link from 'next/link';
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
 import { NAVIGATION_ITEMS } from '../../constants';
 import { useMobileMenu } from '../../hooks/useMobileMenu';
+<<<<<<< HEAD
 import Link from 'next/link';
+=======
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
 
 export const Header = () => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useMobileMenu();
@@ -13,13 +20,21 @@ export const Header = () => {
     <header className="border-b border-gray-700 sticky top-0 z-40">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
+<<<<<<< HEAD
           <Link 
+=======
+          <a 
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
             href="#inicio" 
             className="hover:opacity-80 transition-opacity"
             onClick={closeMobileMenu}
           >
             <Logo />
+<<<<<<< HEAD
           </Link>
+=======
+          </a>
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
@@ -41,7 +56,11 @@ export const Header = () => {
                 Entrar
               </Button>
             </Link>
+<<<<<<< HEAD
             <Link href="/register">
+=======
+            <Link href="/cadastro">
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
               <Button size="sm">
                 Começar Grátis
               </Button>
@@ -99,7 +118,11 @@ export const Header = () => {
                     Entrar
                   </Button>
                 </Link>
+<<<<<<< HEAD
                 <Link href="/register" className="w-full">
+=======
+                <Link href="/cadastro" className="w-full">
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
                   <Button size="sm" className="w-full">
                     Começar Grátis
                   </Button>

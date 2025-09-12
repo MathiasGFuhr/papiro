@@ -1,6 +1,6 @@
 "use client";
 
-import { Header, Footer } from '../components';
+import { Header, Footer } from '../../components';
 
 export default function TermosPage() {
   return (

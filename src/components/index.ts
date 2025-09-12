@@ -17,7 +17,12 @@ export { HowItWorksSection } from './sections/HowItWorksSection';
 export { ContactSection } from './sections/ContactSection';
 
 // Auth Components
+<<<<<<< HEAD
 export { AuthForm, AuthInput } from './auth';
+=======
+export { LoginForm } from './auth/LoginForm';
+export { RegisterForm } from './auth/RegisterForm';
+>>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
 
 // Analytics
 export { default as Analytics } from './Analytics';
