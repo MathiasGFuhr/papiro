@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: 'Papiro Tático',
     images: [
       {
-        url: '/imgens/banner-policia.png',
+        url: '/imagens/banner-policia.png',
         width: 1200,
         height: 630,
         alt: 'Papiro Tático - Sistema de Controle de Estudos',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Papiro Tático - Sistema Inteligente de Controle de Estudos",
     description: "Domine os concursos da PF, PRF, Polícia Civil e DEPEN com IA. Cronograma automático e análise de progresso.",
-    images: ['/imgens/banner-policia.png'],
+    images: ['/imagens/banner-policia.png'],
   },
   robots: {
     index: true,
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/imgens/logo-policia.png",
-    shortcut: "/imgens/logo-policia.png",
-    apple: "/imgens/logo-policia.png",
+    icon: "/imagens/logo-policia.png",
+    shortcut: "/imagens/logo-policia.png",
+    apple: "/imagens/logo-policia.png",
   },
 };
 
@@ -77,9 +77,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/imgens/logo-policia.png" type="image/png" />
-        <link rel="shortcut icon" href="/imgens/logo-policia.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/imgens/logo-policia.png" />
+        <link rel="icon" href="/imagens/logo-policia.png" type="image/png" />
+        <link rel="shortcut icon" href="/imagens/logo-policia.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/imagens/logo-policia.png" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}

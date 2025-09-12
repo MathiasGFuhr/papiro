@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   showText?: boolean;
@@ -6,9 +8,9 @@ interface LogoProps {
 
 export const Logo = ({ size = 'md', showText = true, className = '' }: LogoProps) => {
   const sizeClasses = {
-    sm: 'w-8 h-8',
-    md: 'w-12 h-12',
-    lg: 'w-16 h-16'
+    sm: { width: 32, height: 32 },
+    md: { width: 48, height: 48 },
+    lg: { width: 64, height: 64 }
   };
 
   const textSizes = {
@@ -17,12 +19,18 @@ export const Logo = ({ size = 'md', showText = true, className = '' }: LogoProps
     lg: 'text-2xl'
   };
 
+  const currentSize = sizeClasses[size];
+
   return (
     <div className={`flex items-center space-x-3 ${className}`}>
-      <img
-        src="/imgens/logo-policia.png"
+      <Image
+        src="/imagens/logo-policia.png"
         alt="Logo Papiro Tático"
-        className={`${sizeClasses[size]} object-contain`}
+        width={currentSize.width}
+        height={currentSize.height}
+        className="object-contain"
+        priority
+        unoptimized
       />
       {showText && (
         <h1 className={`font-bold text-white ${textSizes[size]}`}>
