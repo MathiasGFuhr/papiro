@@ -2,9 +2,14 @@
 
 import { useEffect } from 'react';
 
+interface GtagFunction {
+  (...args: unknown[]): void;
+  q?: unknown[][];
+}
+
 declare global {
   interface Window {
-    gtag: (...args: unknown[]) => void;
+    gtag: GtagFunction;
   }
 }
 
@@ -21,7 +26,7 @@ export default function Analytics() {
 
     // Configurar gtag
     window.gtag = function(...args: unknown[]) {
-      const gtag = window.gtag as any;
+      const gtag = window.gtag as GtagFunction;
       gtag.q = gtag.q || [];
       gtag.q.push(args);
     };
