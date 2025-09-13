@@ -28,7 +28,7 @@ export const AuthForm = ({
   footerLinkText,
   footerLinkHref
 }: AuthFormProps) => {
-  const [formData, setFormData] = useState<FormData | null>(null);
+  const [, setFormData] = useState<FormData | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

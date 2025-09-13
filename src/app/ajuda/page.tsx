@@ -121,7 +121,7 @@ export default function AjudaPage() {
           <section className="py-12 bg-gray-800">
             <div className="container mx-auto px-6">
               <h2 className="text-2xl font-bold text-white mb-6">
-                Resultados para "{searchQuery}"
+                Resultados para &quot;{searchQuery}&quot;
               </h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {filteredLinks.map((link, index) => (

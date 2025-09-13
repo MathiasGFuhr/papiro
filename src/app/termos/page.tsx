@@ -163,7 +163,7 @@ export default function TermosPage() {
                 <h2 className="text-2xl font-bold text-white mb-6">10. Isenção de Garantias</h2>
                 
                 <p className="text-gray-300 mb-4">
-                  Nossos serviços são fornecidos "como estão" e "conforme disponível". 
+                  Nossos serviços são fornecidos &quot;como estão&quot; e &quot;conforme disponível&quot;. 
                   Não garantimos que o serviço será ininterrupto, livre de erros ou 
                   atenderá às suas necessidades específicas.
                 </p>
