@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Páginas de autenticação não devem ser indexadas
+Disallow: /login
+Disallow: /register
+
+# Sitemap
+Sitemap: https://papirotatico.com/sitemap.xml

@@ -22,12 +22,13 @@ export const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-6 xl:space-x-8">
+          <nav className="hidden lg:flex space-x-6 xl:space-x-8" role="navigation" aria-label="Menu principal">
             {NAVIGATION_ITEMS.map((item) => (
               <a 
                 key={item.id}
                 href={item.href} 
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                className="text-gray-300 hover:text-white transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded"
+                aria-label={`Ir para seção ${item.label}`}
               >
                 {item.label}
               </a>
@@ -51,8 +52,10 @@ export const Header = () => {
           {/* Mobile/Tablet Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden text-white p-2"
-            aria-label="Menu"
+            className="lg:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded"
+            aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <svg 
               className="w-6 h-6" 
@@ -81,14 +84,15 @@ export const Header = () => {
 
         {/* Mobile/Tablet Navigation */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-gray-700">
-            <nav className="flex flex-col space-y-4 pt-4">
+          <div id="mobile-menu" className="lg:hidden mt-4 pb-4 border-t border-gray-700">
+            <nav className="flex flex-col space-y-4 pt-4" role="navigation" aria-label="Menu mobile">
               {NAVIGATION_ITEMS.map((item) => (
                 <a 
                   key={item.id}
                   href={item.href} 
-                  className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                  className="text-gray-300 hover:text-white transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded"
                   onClick={closeMobileMenu}
+                  aria-label={`Ir para seção ${item.label}`}
                 >
                   {item.label}
                 </a>

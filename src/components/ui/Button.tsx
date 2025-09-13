@@ -36,11 +36,15 @@ export const Button = ({
     <button 
       className={classes}
       disabled={disabled || isLoading}
+      aria-disabled={disabled || isLoading}
       {...props}
     >
       {isLoading ? (
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          <div 
+            className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" 
+            aria-hidden="true"
+          />
           <span>Carregando...</span>
         </div>
       ) : (
