@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     siteName: 'Papiro Tático',
     images: [
       {
-        url: '/imagens/banner-policia.png',
-        width: 1200,
-        height: 630,
+        url: '/favicon.svg',
+        width: 512,
+        height: 512,
         alt: 'Papiro Tático - Sistema de Controle de Estudos',
       },
     ],
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Papiro Tático - Sistema Inteligente de Controle de Estudos",
     description: "Domine os concursos da PF, PRF, Polícia Civil e DEPEN com IA. Cronograma automático e análise de progresso.",
-    images: ['/imagens/banner-policia.png'],
+    images: ['/favicon.svg'],
   },
   robots: {
     index: true,
