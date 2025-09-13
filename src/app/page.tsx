@@ -12,6 +12,7 @@ import {
   ContactSection,
   Analytics
 } from '../components';
+import { ThemeTest } from '../components/ui/ThemeTest';
 import { useScroll } from '../hooks';
 
 export default function Home() {
@@ -25,6 +26,9 @@ export default function Home() {
       <Header />
       
       <main>
+        <div className="container mx-auto px-6 py-8">
+          <ThemeTest />
+        </div>
         <HeroSection />
         <HowItWorksSection />
         <FeaturesSection />

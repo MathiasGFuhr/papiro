@@ -89,7 +89,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Papiro Tático" />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white`}
       >
         <ThemeProvider>
           <StructuredData />

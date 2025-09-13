@@ -11,7 +11,7 @@ export const Header = () => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useMobileMenu();
 
   return (
-    <header className="border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md">
+    <header className="border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40 bg-white dark:bg-gray-900 backdrop-blur-md">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link 
