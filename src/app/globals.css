@@ -157,12 +157,7 @@ html {
 
 /* Melhorias de foco para acessibilidade */
 *:focus {
-<<<<<<< HEAD
   outline: none;
-=======
-  outline: 2px solid #dc2626;
-  outline-offset: 2px;
->>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
 }
 
 /* Header com efeito de blur quando rolar */

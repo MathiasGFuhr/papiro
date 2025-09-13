@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { Button } from '../ui/Button';
 import Link from 'next/link';
-=======
-import Link from 'next/link';
-import { Button } from '../ui/Button';
->>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
 
 export const HeroSection = () => {
   return (
@@ -19,29 +14,16 @@ export const HeroSection = () => {
             análise de progresso e foco estratégico para sua aprovação.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-<<<<<<< HEAD
-            <a href="/register">
-              <Button size="lg" className="w-full sm:w-auto">
-                Começar Grátis Agora
-              </Button>
-            </a>
-            <a href="#como-funciona">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                Ver Demonstração
-              </Button>
-            </a>
-=======
-            <Link href="/cadastro">
+            <Link href="/register">
               <Button size="lg" className="w-full sm:w-auto">
                 Começar Grátis Agora
               </Button>
             </Link>
-            <Link href="/#como-funciona">
+            <Link href="#como-funciona">
               <Button variant="outline" size="lg" className="w-full sm:w-auto">
                 Ver Demonstração
               </Button>
             </Link>
->>>>>>> 5815f5b0d52d13452ffada30218b01153c703865
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
