@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Analytics from "../components/Analytics";
 import { StructuredData } from "../components/StructuredData";
+import { ThemeProvider } from "../contexts/ThemeContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -81,13 +82,20 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#dc2626" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Papiro Tático" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <StructuredData />
-        <Analytics />
-        {children}
+        <ThemeProvider>
+          <StructuredData />
+          <Analytics />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
