@@ -38,8 +38,8 @@ export const AuthForm = ({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-sm sm:max-w-md w-full space-y-6 md:space-y-8">
         {/* Header */}
         <div className="text-center">
           <Link 
@@ -53,7 +53,7 @@ export const AuthForm = ({
         </div>
 
         {/* Form */}
-        <div className="bg-gray-800 py-8 px-6 rounded-lg shadow-2xl border border-gray-700">
+        <div className="bg-gray-800 py-6 md:py-8 px-4 md:px-6 rounded-lg shadow-2xl border border-gray-700">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {children}
             

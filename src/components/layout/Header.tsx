@@ -22,7 +22,7 @@ export const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex space-x-6 xl:space-x-8">
             {NAVIGATION_ITEMS.map((item) => (
               <a 
                 key={item.id}
@@ -35,7 +35,7 @@ export const Header = () => {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
             <Link href="/login">
               <Button variant="outline" size="sm">
                 Entrar
@@ -48,10 +48,10 @@ export const Header = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile/Tablet Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden text-white p-2"
+            className="lg:hidden text-white p-2"
             aria-label="Menu"
           >
             <svg 
@@ -79,9 +79,9 @@ export const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile/Tablet Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-700">
+          <div className="lg:hidden mt-4 pb-4 border-t border-gray-700">
             <nav className="flex flex-col space-y-4 pt-4">
               {NAVIGATION_ITEMS.map((item) => (
                 <a 

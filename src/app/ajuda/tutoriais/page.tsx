@@ -179,7 +179,7 @@ export default function TutoriaisPage() {
         {/* Tutorials Grid */}
         <section className="py-20">
           <div className="container mx-auto px-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredTutorials.map((tutorial) => (
                 <div key={tutorial.id} className="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl border border-gray-700">
                   <div className="p-6">

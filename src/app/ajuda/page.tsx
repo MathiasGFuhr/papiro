@@ -158,7 +158,7 @@ export default function AjudaPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {HELP_CATEGORIES.map((category) => (
                 <Link
                   key={category.id}
@@ -199,7 +199,7 @@ export default function AjudaPage() {
                 Nossa equipe de suporte está sempre pronta para ajudar você a conquistar sua aprovação
               </p>
               
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <div className="bg-gray-700 p-6 rounded-lg">
                   <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center text-2xl mb-4 mx-auto">
                     💬

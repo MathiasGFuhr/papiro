@@ -15,13 +15,13 @@ export const PricingSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {PRICING_PLANS.map((plan, index) => (
             <div 
               key={index}
-              className={`relative bg-gray-800 p-8 rounded-lg ${
+              className={`relative bg-gray-800 p-6 md:p-8 rounded-lg ${
                 plan.isPopular 
-                  ? 'border-2 border-red-600 transform scale-105' 
+                  ? 'border-2 border-red-600 lg:transform lg:scale-105' 
                   : 'border border-gray-700'
               }`}
             >
