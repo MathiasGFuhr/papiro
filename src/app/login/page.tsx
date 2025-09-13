@@ -4,16 +4,6 @@ import { AuthForm } from '../../components/auth/AuthForm';
 import { AuthInput } from '../../components/auth/AuthInput';
 import { useState } from 'react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Entrar - Papiro Tático',
-  description: 'Faça login na sua conta do Papiro Tático e continue seus estudos para concursos policiais.',
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);

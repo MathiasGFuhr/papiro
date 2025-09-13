@@ -4,16 +4,6 @@ import { AuthForm } from '../../components/auth/AuthForm';
 import { AuthInput } from '../../components/auth/AuthInput';
 import { useState } from 'react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Cadastrar - Papiro Tático',
-  description: 'Crie sua conta gratuita no Papiro Tático e comece a otimizar seus estudos para concursos policiais.',
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
