@@ -7,18 +7,6 @@
   --foreground: #111827;
 }
 
-/* Modo escuro */
-.dark {
-  --background: #111827;
-  --foreground: #ffffff;
-}
-
-/* Modo claro */
-.light {
-  --background: #ffffff;
-  --foreground: #111827;
-}
-
 
 /* Transições suaves globais */
 * {

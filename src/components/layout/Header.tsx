@@ -2,7 +2,6 @@
 
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
-import { ThemeToggle } from '../ui/ThemeToggle';
 import { NAVIGATION_ITEMS } from '../../constants';
 import { useMobileMenu } from '../../hooks/useMobileMenu';
 import Link from 'next/link';
@@ -11,7 +10,7 @@ export const Header = () => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useMobileMenu();
 
   return (
-    <header className="border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40 bg-white dark:bg-gray-900 backdrop-blur-md">
+    <header className="border-b border-gray-200 sticky top-0 z-40 bg-white backdrop-blur-md">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link 
@@ -28,7 +27,7 @@ export const Header = () => {
               <a 
                 key={item.id}
                 href={item.href} 
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900 rounded"
+                className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white rounded"
                 aria-label={`Ir para seção ${item.label}`}
               >
                 {item.label}
@@ -38,7 +37,6 @@ export const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
-            <ThemeToggle />
             <Link href="/login">
               <Button variant="outline" size="sm">
                 Entrar
@@ -54,7 +52,7 @@ export const Header = () => {
           {/* Mobile/Tablet Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden text-gray-600 dark:text-white p-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900 rounded"
+            className="lg:hidden text-gray-600 p-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white rounded"
             aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -86,13 +84,13 @@ export const Header = () => {
 
         {/* Mobile/Tablet Navigation */}
         {isMobileMenuOpen && (
-          <div id="mobile-menu" className="lg:hidden mt-4 pb-4 border-t border-gray-200 dark:border-gray-700">
+          <div id="mobile-menu" className="lg:hidden mt-4 pb-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4 pt-4" role="navigation" aria-label="Menu mobile">
               {NAVIGATION_ITEMS.map((item) => (
                 <a 
                   key={item.id}
                   href={item.href} 
-                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900 rounded"
+                  className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white rounded"
                   onClick={closeMobileMenu}
                   aria-label={`Ir para seção ${item.label}`}
                 >
@@ -100,9 +98,6 @@ export const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4">
-                <div className="flex justify-center">
-                  <ThemeToggle />
-                </div>
                 <Link href="/login" className="w-full">
                   <Button variant="outline" size="sm" className="w-full">
                     Entrar
