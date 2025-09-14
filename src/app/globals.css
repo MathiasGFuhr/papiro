@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Otimizações de performance */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Preload de fontes críticas */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter'), url('/fonts/inter-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Inter'), url('/fonts/inter-semibold.woff2') format('woff2');
+}
+
+/* Otimizações de renderização */
+* {
+  box-sizing: border-box;
+}
+
+/* Melhor performance para animações */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #111827;

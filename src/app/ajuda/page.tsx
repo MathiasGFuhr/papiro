@@ -1,6 +1,6 @@
 "use client";
 
-import { Header, Footer } from '../../components';
+import { HelpHeader, Footer } from '../../components';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -82,7 +82,7 @@ export default function AjudaPage() {
 
   return (
     <>
-      <Header />
+      <HelpHeader />
       
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {/* Hero Section */}

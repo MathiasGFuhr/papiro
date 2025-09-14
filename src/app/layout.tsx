@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Analytics from "../components/Analytics";
 import { StructuredData } from "../components/StructuredData";
+import { PreloadResources } from "../components/PreloadResources";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -90,6 +91,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900`}
       >
+        <PreloadResources />
         <StructuredData />
         <Analytics />
         {children}
