@@ -4,29 +4,16 @@ import { useEffect } from 'react';
 
 export const PreloadResources = () => {
   useEffect(() => {
-    // Preload de fontes críticas
+    // Preload de fontes críticas (removido - usando Google Fonts)
     const preloadFonts = () => {
-      const fontLinks = [
-        { href: '/fonts/inter-regular.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-        { href: '/fonts/inter-semibold.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      ];
-
-      fontLinks.forEach(({ href, as, type, crossOrigin }) => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = href;
-        link.as = as;
-        link.type = type;
-        link.crossOrigin = crossOrigin;
-        document.head.appendChild(link);
-      });
+      // Fontes são carregadas via Google Fonts no layout.tsx
+      // Não precisamos preload manual
     };
 
     // Preload de imagens críticas
     const preloadImages = () => {
       const imageUrls = [
-        '/favicon.svg',
-        '/next.svg',
+        '/imagens/Logo3d.png',
         '/vercel.svg',
       ];
 

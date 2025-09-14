@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 31536000, // 1 ano
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: false,
+    loader: 'default',
+    qualities: [25, 50, 75, 100], // Suporte para quality no componente Image
   },
   
   // Compilador otimizado
