@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Analytics from "../components/Analytics";
-import { StructuredData } from "../components/StructuredData";
-import { PreloadResources } from "../components/PreloadResources";
+import Analytics from "@/components/Analytics";
+import { StructuredData } from "@/components/StructuredData";
+import { PreloadResources } from "@/components/PreloadResources";
 
 const inter = Inter({
   variable: "--font-inter",

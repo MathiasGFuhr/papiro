@@ -2,7 +2,7 @@
 
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
-import { useMobileMenu } from '../../hooks/useMobileMenu';
+import { useMobileMenu } from '@/hooks/useMobileMenu';
 import Link from 'next/link';
 
 export const HelpHeader = () => {

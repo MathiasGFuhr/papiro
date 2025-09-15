@@ -13,8 +13,8 @@ import {
   Analytics,
   LazySection,
   PageLoader
-} from '../components';
-import { useScroll, usePageLoader } from '../hooks';
+} from '@/components';
+import { useScroll, usePageLoader } from '@/hooks';
 
 export default function Home() {
   const { scrollProgress, showBackToTop, scrollToTop } = useScroll();
