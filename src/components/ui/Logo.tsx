@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import Image from 'next/image';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
@@ -19,15 +18,18 @@ export const Logo = memo(({ size = 'md', showText = true, className = '' }: Logo
   return (
     <div className={`flex items-center space-x-3 ${className}`}>
       <div className="flex items-center justify-center">
-        <Image
+        <img
           src="/imagens/Logo3d.png"
           alt="Papiro Tático Logo"
           width={currentSize.width}
           height={currentSize.height}
           className="object-contain"
-          priority
-          quality={100}
-          unoptimized={true}
+          style={{ 
+            width: currentSize.width, 
+            height: currentSize.height,
+            maxWidth: '100%',
+            height: 'auto'
+          }}
         />
       </div>
       {showText && (
