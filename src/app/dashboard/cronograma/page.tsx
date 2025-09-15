@@ -196,7 +196,16 @@ export default function CronogramaPage() {
           const dataAtual = new Date(dataInicio);
           dataAtual.setDate(dataInicio.getDate() + (semana * 7) + dia);
           
-          const diaData = {
+          const diaData: {
+            nome: string;
+            data: string;
+            materias: Array<{
+              nome: string;
+              horas: number;
+              peso: number;
+              tipo: string;
+            }>;
+          } = {
             nome: diasSemana[dia],
             data: dataAtual.toISOString().split('T')[0],
             materias: []
