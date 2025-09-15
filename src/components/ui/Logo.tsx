@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import Image from 'next/image';
 
 interface LogoProps {
@@ -8,8 +8,6 @@ interface LogoProps {
 }
 
 export const Logo = memo(({ size = 'md', showText = true, className = '' }: LogoProps) => {
-  const [imageError, setImageError] = useState(false);
-  
   const sizeClasses = {
     sm: { width: 32, height: 32, textSize: 'text-lg' },
     md: { width: 48, height: 48, textSize: 'text-xl' },
@@ -21,23 +19,16 @@ export const Logo = memo(({ size = 'md', showText = true, className = '' }: Logo
   return (
     <div className={`flex items-center space-x-3 ${className}`}>
       <div className="flex items-center justify-center">
-        {!imageError ? (
-          <Image
-            src="/imagens/Logo3d.png"
-            alt="Papiro Tático Logo"
-            width={currentSize.width}
-            height={currentSize.height}
-            className="object-contain"
-            priority
-            quality={100}
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div className="bg-red-600 text-white font-bold rounded-lg flex items-center justify-center" 
-               style={{ width: currentSize.width, height: currentSize.height }}>
-            PT
-          </div>
-        )}
+        <Image
+          src="/imagens/Logo3d.png"
+          alt="Papiro Tático Logo"
+          width={currentSize.width}
+          height={currentSize.height}
+          className="object-contain"
+          priority
+          quality={100}
+          unoptimized={true}
+        />
       </div>
       {showText && (
         <h1 className={`font-bold text-white ${currentSize.textSize} tracking-tight`}>
