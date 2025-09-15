@@ -90,12 +90,12 @@ export default function VerificarEmailPage() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-red-400 mr-2">2.</span>
-                  Procure por "Papiro Tático - Verificação"
+                  Procure por &quot;Papiro Tático - Verificação&quot;
                 </li>
-                <li className="flex items-start">
-                  <span className="text-red-400 mr-2">3.</span>
-                  Clique no botão "Verificar Email"
-                </li>
+                  <li className="flex items-start">
+                    <span className="text-red-400 mr-2">3.</span>
+                    Clique no botão &quot;Verificar Email&quot;
+                  </li>
                 <li className="flex items-start">
                   <span className="text-red-400 mr-2">4.</span>
                   Sua conta será ativada automaticamente

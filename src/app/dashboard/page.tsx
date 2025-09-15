@@ -1,16 +1,15 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
 
 export default function DashboardPage() {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [user, setUser] = useState({
+  const [user] = useState({
     name: 'Carlos Silva',
     email: 'carlos@papirotatico.com',
     plan: 'Premium',
@@ -73,7 +72,7 @@ export default function DashboardPage() {
     }
   ];
 
-  const [stats, setStats] = useState({
+  const [stats] = useState({
     totalStudyTime: '127h 45min',
     completedTopics: 89,
     totalTopics: 120,
@@ -82,20 +81,20 @@ export default function DashboardPage() {
     accuracy: 87
   });
 
-  const [recentActivity, setRecentActivity] = useState([
+  const [recentActivity] = useState([
     { id: 1, action: 'Concluído: Direito Constitucional - Módulo 5', time: '2 horas atrás', type: 'completed', score: 95 },
     { id: 2, action: 'Simulado: Português - 50 questões', time: 'Ontem', type: 'quiz', score: 88 },
     { id: 3, action: 'Revisão: Matemática Financeira', time: '2 dias atrás', type: 'review', score: 92 },
     { id: 4, action: 'Iniciado: Direito Penal - Módulo 3', time: '3 dias atrás', type: 'started', score: null }
   ]);
 
-  const [upcomingTasks, setUpcomingTasks] = useState([
+  const [upcomingTasks] = useState([
     { id: 1, title: 'Direito Administrativo - Aula 7', time: '14:00', priority: 'high', duration: '2h' },
     { id: 2, title: 'Simulado: Raciocínio Lógico', time: '16:00', priority: 'medium', duration: '1h 30min' },
     { id: 3, title: 'Revisão: Português', time: '18:00', priority: 'low', duration: '1h' }
   ]);
 
-  const [weeklyProgress, setWeeklyProgress] = useState([
+  const [weeklyProgress] = useState([
     { day: 'Seg', hours: 3.5, completed: true },
     { day: 'Ter', hours: 4.2, completed: true },
     { day: 'Qua', hours: 2.8, completed: true },
