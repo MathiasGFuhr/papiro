@@ -5,10 +5,13 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
 
-export default function LoginPage() {
+export default function CadastroPage() {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: '',
+    acceptTerms: false
   });
   const [formStatus, setFormStatus] = useState({
     loading: false,
@@ -16,34 +19,47 @@ export default function LoginPage() {
     success: false
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
+  };
+
+  const validateForm = () => {
+    if (formData.password !== formData.confirmPassword) {
+      return 'As senhas não coincidem.';
+    }
+    if (formData.password.length < 6) {
+      return 'A senha deve ter pelo menos 6 caracteres.';
+    }
+    if (!formData.acceptTerms) {
+      return 'Você deve aceitar os termos de uso.';
+    }
+    return null;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const validationError = validateForm();
+    if (validationError) {
+      setFormStatus({ loading: false, error: validationError, success: false });
+      return;
+    }
+
     setFormStatus({ loading: true, error: '', success: false });
 
-    // Simular autenticação
+    // Simular cadastro
     setTimeout(() => {
-      if (formData.email === 'admin@papirotatico.com' && formData.password === '123456') {
-        setFormStatus({ loading: false, error: '', success: true });
-        // Redirecionar para dashboard após login bem-sucedido
-        setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 1500);
-      } else {
-        setFormStatus({ 
-          loading: false, 
-          error: 'Email ou senha incorretos. Tente novamente.', 
-          success: false 
-        });
-      }
+      setFormStatus({ loading: false, error: '', success: true });
+      // Redirecionar para verificação de email
+      setTimeout(() => {
+        window.location.href = '/verificar-email';
+      }, 2000);
     }, 2000);
   };
 
@@ -56,16 +72,34 @@ export default function LoginPage() {
             <Logo size="lg" />
           </div>
           <h2 className="text-3xl font-bold text-white">
-            Bem-vindo de volta
+            Crie sua conta
           </h2>
           <p className="mt-2 text-gray-300">
-            Entre na sua conta para continuar seus estudos
+            Comece sua jornada rumo à aprovação
           </p>
         </div>
 
-        {/* Formulário de Login */}
+        {/* Formulário de Cadastro */}
         <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Campo Nome */}
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                Nome Completo
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                value={formData.name}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+                placeholder="Seu nome completo"
+              />
+            </div>
+
             {/* Campo Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
@@ -94,12 +128,12 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   type={showPassword ? 'text' : 'password'}
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   required
                   value={formData.password}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors pr-12"
-                  placeholder="Sua senha"
+                  placeholder="Mínimo 6 caracteres"
                 />
                 <button
                   type="button"
@@ -120,38 +154,72 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Lembrar-me e Esqueci a senha */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
+            {/* Campo Confirmar Senha */}
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
+                Confirmar Senha
+              </label>
+              <div className="relative">
                 <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-600 rounded bg-gray-700"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  required
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors pr-12"
+                  placeholder="Digite a senha novamente"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
-                  Lembrar-me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <Link 
-                  href="/recuperar-senha" 
-                  className="text-red-400 hover:text-red-300 transition-colors"
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white transition-colors"
                 >
-                  Esqueceu a senha?
-                </Link>
+                  {showConfirmPassword ? (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  )}
+                </button>
               </div>
             </div>
 
-            {/* Botão de Login */}
+            {/* Checkbox Termos */}
+            <div className="flex items-start">
+              <input
+                id="acceptTerms"
+                name="acceptTerms"
+                type="checkbox"
+                checked={formData.acceptTerms}
+                onChange={handleInputChange}
+                className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-600 rounded bg-gray-700 mt-1"
+              />
+              <label htmlFor="acceptTerms" className="ml-2 block text-sm text-gray-300">
+                Eu aceito os{' '}
+                <Link href="/termos" className="text-red-400 hover:text-red-300">
+                  Termos de Uso
+                </Link>
+                {' '}e a{' '}
+                <Link href="/privacidade" className="text-red-400 hover:text-red-300">
+                  Política de Privacidade
+                </Link>
+              </label>
+            </div>
+
+            {/* Botão de Cadastro */}
             <Button 
               type="submit" 
               className="w-full"
               isLoading={formStatus.loading}
               disabled={formStatus.loading}
             >
-              {formStatus.loading ? 'Entrando...' : 'Entrar'}
+              {formStatus.loading ? 'Criando conta...' : 'Criar Conta'}
             </Button>
 
             {/* Mensagens de Status */}
@@ -163,32 +231,23 @@ export default function LoginPage() {
 
             {formStatus.success && (
               <div className="p-4 bg-green-600 text-white rounded-lg text-sm">
-                Login realizado com sucesso! Redirecionando...
+                Conta criada com sucesso! Verifique seu email para ativar a conta.
               </div>
             )}
           </form>
 
-          {/* Link para Cadastro */}
+          {/* Link para Login */}
           <div className="mt-6 text-center">
             <p className="text-gray-300">
-              Não tem uma conta?{' '}
+              Já tem uma conta?{' '}
               <Link 
-                href="/cadastro" 
+                href="/login" 
                 className="text-red-400 hover:text-red-300 font-medium transition-colors"
               >
-                Cadastre-se gratuitamente
+                Faça login aqui
               </Link>
             </p>
           </div>
-        </div>
-
-        {/* Informações de Teste */}
-        <div className="bg-gray-800 p-4 rounded-lg">
-          <h3 className="text-sm font-medium text-white mb-2">Credenciais de Teste:</h3>
-          <p className="text-xs text-gray-300">
-            <strong>Email:</strong> admin@papirotatico.com<br />
-            <strong>Senha:</strong> 123456
-          </p>
         </div>
 
         {/* Link para Voltar */}
