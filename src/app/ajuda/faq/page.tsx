@@ -1,6 +1,6 @@
 "use client";
 
-import { HelpHeader, Footer } from '../../../components';
+import { HelpHeader, Footer } from '@/components';
 import { useState } from 'react';
 import Link from 'next/link';
 

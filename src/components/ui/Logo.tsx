@@ -17,16 +17,19 @@ export const Logo = memo(({ size = 'md', showText = true, className = '' }: Logo
   const currentSize = sizeClasses[size];
 
   return (
-    <div className={`flex items-center space-x-3 logo-container ${className}`}>
-      <div className={`${currentSize.textSize} flex items-center justify-center logo-container`}>
+    <div className={`flex items-center space-x-3 ${className}`}>
+      <div className="flex items-center justify-center">
         <Image
-          src="/imagens/Logo3d.png"
+          src="/logo.png"
           alt="Papiro Tático Logo"
           width={currentSize.width}
           height={currentSize.height}
-          className="object-contain logo-image"
-          priority
-          quality={100}
+          className="object-contain"
+          style={{ 
+            width: currentSize.width, 
+            height: currentSize.height,
+            maxWidth: '100%'
+          }}
         />
       </div>
       {showText && (

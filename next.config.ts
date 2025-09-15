@@ -18,6 +18,12 @@ const nextConfig: NextConfig = {
     unoptimized: false,
     loader: 'default',
     qualities: [25, 50, 75, 100], // Suporte para quality no componente Image
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   
   // Compilador otimizado

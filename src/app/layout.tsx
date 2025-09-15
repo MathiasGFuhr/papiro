@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Analytics from "../components/Analytics";
-import { StructuredData } from "../components/StructuredData";
-import { PreloadResources } from "../components/PreloadResources";
+import { PWAProvider } from "@/components/providers/PWAProvider";
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
@@ -38,7 +31,7 @@ export const metadata: Metadata = {
     siteName: 'Papiro Tático',
     images: [
       {
-        url: '/imagens/Logo3d.png',
+        url: '/logo.png',
         width: 512,
         height: 512,
         alt: 'Papiro Tático - Sistema de Controle de Estudos',
@@ -51,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Papiro Tático - Sistema Inteligente de Controle de Estudos",
     description: "Domine os concursos da PF, PRF, Polícia Civil e DEPEN com IA. Cronograma automático e análise de progresso.",
-    images: ['/imagens/Logo3d.png'],
+    images: ['/logo.png'],
   },
   robots: {
     index: true,
@@ -65,9 +58,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/imagens/Logo3d.png",
-    shortcut: "/imagens/Logo3d.png",
-    apple: "/imagens/Logo3d.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
 };
 
@@ -79,22 +72,26 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/imagens/Logo3d.png" type="image/png" />
-        <link rel="shortcut icon" href="/imagens/Logo3d.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/imagens/Logo3d.png" />
+        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="shortcut icon" href="/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#dc2626" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Papiro Tático" />
+        <meta name="application-name" content="Papiro Tático" />
+        <meta name="msapplication-TileColor" content="#dc2626" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900`}
+        className={`${inter.variable} antialiased bg-white text-gray-900`}
       >
-        <PreloadResources />
-        <StructuredData />
-        <Analytics />
-        {children}
+        <PWAProvider>
+          {children}
+        </PWAProvider>
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
-import { useMobileMenu } from '../../hooks/useMobileMenu';
+import { useMobileMenu } from '@/hooks/useMobileMenu';
 import Link from 'next/link';
 
 export const HelpHeader = () => {
@@ -58,7 +58,7 @@ export const HelpHeader = () => {
               <Button 
                 variant="outline" 
                 size="sm"
-                className="border-gray-400 text-gray-300 hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
+                className="border-gray-400 text-gray-300 hover:bg-gray-100 hover:text-gray-800 hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
               >
                 Entrar
               </Button>
@@ -143,7 +143,7 @@ export const HelpHeader = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="w-full border-gray-400 text-gray-300 hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
+                    className="w-full border-gray-400 text-gray-300 hover:bg-gray-100 hover:text-gray-800 hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
                   >
                     Entrar
                   </Button>
