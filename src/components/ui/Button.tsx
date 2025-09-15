@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode, memo } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline';
@@ -7,7 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
 }
 
-export const Button = ({ 
+export const Button = memo(({ 
   variant = 'primary', 
   size = 'md', 
   children, 
@@ -52,4 +52,6 @@ export const Button = ({
       )}
     </button>
   );
-};
+});
+
+Button.displayName = 'Button';

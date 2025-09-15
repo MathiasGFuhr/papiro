@@ -2,6 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Otimizações de performance */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Preload de fontes críticas */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter'), url('/fonts/inter-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Inter'), url('/fonts/inter-semibold.woff2') format('woff2');
+}
+
+/* Otimizações de renderização */
+* {
+  box-sizing: border-box;
+}
+
+/* Melhor performance para animações */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Otimizações específicas para logo */
+.logo-image {
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  shape-rendering: geometricPrecision;
+  background: transparent !important;
+  background-color: transparent !important;
+  mix-blend-mode: normal;
+}
+
+/* Suavização aprimorada para imagens */
+img {
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  shape-rendering: geometricPrecision;
+}
+
+/* Melhor suavização para imagens PNG */
+img[src*=".png"] {
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  filter: contrast(1.1) brightness(1.05);
+}
+
+/* Remover fundo da logo */
+img[src*="Logo3d.png"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  mix-blend-mode: normal;
+  filter: none;
+}
+
+/* Container da logo sem fundo */
+.logo-container {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #111827;

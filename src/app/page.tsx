@@ -10,26 +10,38 @@ import {
   FeaturesSection,
   PricingSection,
   ContactSection,
-  Analytics
+  Analytics,
+  LazySection,
+  PageLoader
 } from '../components';
-import { useScroll } from '../hooks';
+import { useScroll, usePageLoader } from '../hooks';
 
 export default function Home() {
   const { scrollProgress, showBackToTop, scrollToTop } = useScroll();
+  const { isLoading } = usePageLoader();
 
   return (
     <>
       <Analytics />
       <ScrollProgress progress={scrollProgress} />
+      <PageLoader isLoading={isLoading} />
       
       <Header />
       
       <main>
         <HeroSection />
-        <HowItWorksSection />
-        <FeaturesSection />
-        <PricingSection />
-        <ContactSection />
+        <LazySection>
+          <HowItWorksSection />
+        </LazySection>
+        <LazySection>
+          <FeaturesSection />
+        </LazySection>
+        <LazySection>
+          <PricingSection />
+        </LazySection>
+        <LazySection>
+          <ContactSection />
+        </LazySection>
       </main>
       
       <Footer />

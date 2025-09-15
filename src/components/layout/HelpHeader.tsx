@@ -2,11 +2,10 @@
 
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
-import { NAVIGATION_ITEMS } from '../../constants';
 import { useMobileMenu } from '../../hooks/useMobileMenu';
 import Link from 'next/link';
 
-export const Header = () => {
+export const HelpHeader = () => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useMobileMenu();
 
   return (
@@ -22,36 +21,35 @@ export const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-8" role="navigation" aria-label="Menu principal">
-            {NAVIGATION_ITEMS.map((item) => (
-              <a 
-                key={item.id}
-                href={item.href} 
-                className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/10 hover:shadow-md relative group"
-                aria-label={`Ir para seção ${item.label}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  
-                  // Verifica se estamos na página principal
-                  if (window.location.pathname === '/') {
-                    // Se estivermos na página principal, faz scroll suave
-                    const element = document.querySelector(item.href);
-                    if (element) {
-                      element.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                      });
-                    }
-                  } else {
-                    // Se estivermos em outra página, navega para a principal com âncora
-                    window.location.href = `/${item.href}`;
-                  }
-                }}
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+          <nav className="hidden lg:flex space-x-8" role="navigation" aria-label="Menu de ajuda">
+            <Link 
+              href="/ajuda" 
+              className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/10 hover:shadow-md relative group"
+            >
+              Central de Ajuda
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link 
+              href="/ajuda/tutoriais" 
+              className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/10 hover:shadow-md relative group"
+            >
+              Tutoriais
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link 
+              href="/ajuda/faq" 
+              className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/10 hover:shadow-md relative group"
+            >
+              FAQ
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link 
+              href="/ajuda/status" 
+              className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/10 hover:shadow-md relative group"
+            >
+              Status
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
           </nav>
 
           {/* Desktop CTA */}
@@ -111,36 +109,35 @@ export const Header = () => {
         {/* Mobile/Tablet Navigation */}
         {isMobileMenuOpen && (
           <div id="mobile-menu" className="lg:hidden mt-4 pb-4 border-t border-gray-700 bg-gray-800/50 backdrop-blur-sm rounded-lg shadow-lg">
-            <nav className="flex flex-col space-y-2 pt-4 px-4" role="navigation" aria-label="Menu mobile">
-              {NAVIGATION_ITEMS.map((item) => (
-                <a 
-                  key={item.id}
-                  href={item.href} 
-                  className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-3 rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    closeMobileMenu();
-                    
-                    // Verifica se estamos na página principal
-                    if (window.location.pathname === '/') {
-                      // Se estivermos na página principal, faz scroll suave
-                      const element = document.querySelector(item.href);
-                      if (element) {
-                        element.scrollIntoView({ 
-                          behavior: 'smooth',
-                          block: 'start'
-                        });
-                      }
-                    } else {
-                      // Se estivermos em outra página, navega para a principal com âncora
-                      window.location.href = `/${item.href}`;
-                    }
-                  }}
-                  aria-label={`Ir para seção ${item.label}`}
-                >
-                  {item.label}
-                </a>
-              ))}
+            <nav className="flex flex-col space-y-2 pt-4 px-4" role="navigation" aria-label="Menu mobile de ajuda">
+              <Link 
+                href="/ajuda" 
+                className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-3 rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                onClick={closeMobileMenu}
+              >
+                Central de Ajuda
+              </Link>
+              <Link 
+                href="/ajuda/tutoriais" 
+                className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-3 rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                onClick={closeMobileMenu}
+              >
+                Tutoriais
+              </Link>
+              <Link 
+                href="/ajuda/faq" 
+                className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-3 rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                onClick={closeMobileMenu}
+              >
+                FAQ
+              </Link>
+              <Link 
+                href="/ajuda/status" 
+                className="text-gray-300 hover:text-white transition-all duration-300 text-sm font-medium px-4 py-3 rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                onClick={closeMobileMenu}
+              >
+                Status
+              </Link>
               <div className="flex flex-col space-y-3 pt-4 px-4">
                 <Link href="/login" className="w-full">
                   <Button 

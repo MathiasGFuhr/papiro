@@ -6,9 +6,13 @@ export { ScrollProgress } from './ui/ScrollProgress';
 export { BackToTop } from './ui/BackToTop';
 export { LoadingSpinner } from './ui/LoadingSpinner';
 export { Skeleton, SkeletonCard, SkeletonText } from './ui/Skeleton';
+export { PageLoader } from './ui/PageLoader';
+export { LazySection } from './ui/LazySection';
 
 // Layout Components
 export { Header } from './layout/Header';
+export { HelpHeader } from './layout/HelpHeader';
+export { AuthHeader } from './layout/AuthHeader';
 export { Footer } from './layout/Footer';
 
 // Section Components
