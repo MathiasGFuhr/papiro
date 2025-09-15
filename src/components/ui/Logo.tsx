@@ -19,7 +19,7 @@ export const Logo = memo(({ size = 'md', showText = true, className = '' }: Logo
     <div className={`flex items-center space-x-3 ${className}`}>
       <div className="flex items-center justify-center">
         <img
-          src="/imagens/Logo3d.png"
+          src="/logo.png"
           alt="Papiro Tático Logo"
           width={currentSize.width}
           height={currentSize.height}
