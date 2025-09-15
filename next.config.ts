@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   
-  // Headers de cache
+  // Headers de cache e segurança
   async headers() {
     return [
       {
@@ -70,6 +70,19 @@ const nextConfig: NextConfig = {
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
+          }
+        ],
+      },
+      {
+        source: '/manifest.json',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/manifest+json'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400'
           }
         ],
       },
