@@ -60,7 +60,7 @@ export const Header = () => {
               <Button 
                 variant="outline" 
                 size="sm"
-                className="border-gray-400 text-gray-300 hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
+                className="border-gray-400 text-gray-300 hover:bg-gray-100 hover:text-gray-800 hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
               >
               Entrar
             </Button>
@@ -146,7 +146,7 @@ export const Header = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="w-full border-gray-400 text-gray-300 hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
+                    className="w-full border-gray-400 text-gray-300 hover:bg-gray-100 hover:text-gray-800 hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
                   >
                   Entrar
                 </Button>
