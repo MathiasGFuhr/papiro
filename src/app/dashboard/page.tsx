@@ -104,21 +104,21 @@ export default function DashboardPage() {
     { day: 'Dom', hours: 0, completed: false }
   ]);
 
-  // Sistema de Avatares por Nível
+  // Sistema de Avatares por Nível - Temas Policiais
   const getAvatarByLevel = (level: number) => {
-    if (level >= 1 && level <= 5) return { emoji: '🥉', title: 'Iniciante', color: 'from-gray-500 to-gray-600' };
-    if (level >= 6 && level <= 10) return { emoji: '🥈', title: 'Aprendiz', color: 'from-blue-500 to-blue-600' };
-    if (level >= 11 && level <= 15) return { emoji: '⚔️', title: 'Guerreiro', color: 'from-purple-500 to-purple-600' };
-    if (level >= 16 && level <= 20) return { emoji: '🏆', title: 'Campeão', color: 'from-yellow-500 to-orange-500' };
-    if (level >= 21 && level <= 25) return { emoji: '👑', title: 'Mestre', color: 'from-red-500 to-pink-500' };
-    if (level >= 26 && level <= 30) return { emoji: '🌟', title: 'Lenda', color: 'from-indigo-500 to-purple-600' };
-    return { emoji: '💎', title: 'Supremo', color: 'from-cyan-500 to-blue-600' };
+    if (level >= 1 && level <= 5) return { emoji: '👮‍♂️', title: 'Recruta', color: 'from-gray-600 to-gray-700' };
+    if (level >= 6 && level <= 10) return { emoji: '🛡️', title: 'Soldado', color: 'from-blue-600 to-blue-700' };
+    if (level >= 11 && level <= 15) return { emoji: '⚔️', title: 'Sargento', color: 'from-slate-600 to-slate-700' };
+    if (level >= 16 && level <= 20) return { emoji: '🏅', title: 'Tenente', color: 'from-amber-600 to-amber-700' };
+    if (level >= 21 && level <= 25) return { emoji: '👑', title: 'Capitão', color: 'from-red-600 to-red-700' };
+    if (level >= 26 && level <= 30) return { emoji: '⭐', title: 'Major', color: 'from-indigo-600 to-indigo-700' };
+    return { emoji: '🎖️', title: 'Coronel', color: 'from-yellow-600 to-yellow-700' };
   };
 
   const currentAvatar = getAvatarByLevel(user.level);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex">
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div 
@@ -127,26 +127,26 @@ export default function DashboardPage() {
         />
       )}
       {/* Sidebar */}
-      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 w-72 bg-black/30 backdrop-blur-xl border-r border-white/10 transition-transform duration-300 ease-in-out`}>
+      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 w-72 bg-slate-800/90 backdrop-blur-xl border-r border-blue-500/20 transition-transform duration-300 ease-in-out`}>
         <div className="flex flex-col h-full">
           {/* Logo Section */}
-          <div className="p-6 border-b border-white/10">
+          <div className="p-6 border-b border-blue-500/20">
             <div className="flex items-center space-x-3">
               <div className="relative">
                 <Logo size="sm" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                   Papiro Tático
                 </h1>
-                <p className="text-xs text-gray-400">Sistema de Estudos</p>
+                <p className="text-xs text-blue-300">Sistema de Estudos</p>
               </div>
             </div>
           </div>
 
           {/* Avatar & Level Section */}
-          <div className="p-6 border-b border-white/10">
+          <div className="p-6 border-b border-blue-500/20">
             <div className="text-center">
               {/* Avatar Simples */}
               <div className="relative mx-auto mb-4 w-16 h-16">
@@ -229,7 +229,7 @@ export default function DashboardPage() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Top Header */}
-        <header className="bg-black/20 backdrop-blur-xl border-b border-white/10 lg:border-l border-white/10">
+        <header className="bg-slate-800/50 backdrop-blur-xl border-b border-blue-500/20 lg:border-l border-blue-500/20">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               {/* Mobile Menu Button */}
@@ -244,10 +244,10 @@ export default function DashboardPage() {
 
               {/* Page Title */}
               <div className="flex-1 lg:flex-none">
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                   Visão Geral
                 </h2>
-                <p className="text-sm text-gray-400">Dashboard do seu progresso</p>
+                <p className="text-sm text-blue-300">Dashboard do seu progresso</p>
               </div>
 
               {/* Quick Actions */}
@@ -297,7 +297,7 @@ export default function DashboardPage() {
         {/* Premium Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {/* Study Time */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-blue-600/20 to-blue-700/20 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
@@ -317,7 +317,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Completed Topics */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-slate-600/20 to-slate-700/20 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
@@ -337,7 +337,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Efficiency */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-amber-600/20 to-amber-700/20 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
@@ -357,7 +357,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Accuracy */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-red-600/20 to-red-700/20 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
@@ -381,7 +381,7 @@ export default function DashboardPage() {
           {/* Main Content */}
           <div className="xl:col-span-3 space-y-8">
             {/* Progress Overview */}
-            <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
+            <div className="bg-slate-800/50 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-8">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-2xl font-bold text-white">Visão Geral do Progresso</h3>
                 <div className="flex items-center space-x-2">
@@ -442,7 +442,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
+            <div className="bg-slate-800/50 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-8">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-2xl font-bold text-white">Atividade Recente</h3>
                 <Link href="/dashboard/atividade" className="text-blue-400 hover:text-blue-300 text-sm font-medium">
@@ -477,7 +477,7 @@ export default function DashboardPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Upcoming Tasks */}
-            <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+            <div className="bg-slate-800/50 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6">
               <h3 className="text-xl font-bold text-white mb-4">Próximas Tarefas</h3>
               <div className="space-y-4">
                 {upcomingTasks.map((task) => (
@@ -499,7 +499,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Quick Stats */}
-            <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+            <div className="bg-slate-800/50 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6">
               <h3 className="text-xl font-bold text-white mb-4">Resumo Rápido</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
