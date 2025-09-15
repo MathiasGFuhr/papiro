@@ -36,7 +36,19 @@ export default function CronogramaPage() {
       horas: number;
       concluido: number;
     }>;
-    cronogramaAutomatico: Array<any>;
+    cronogramaAutomatico: Array<{
+      semana: number;
+      dias: Array<{
+        nome: string;
+        data: string;
+        materias: Array<{
+          nome: string;
+          horas: number;
+          peso: number;
+          tipo: string;
+        }>;
+      }>;
+    }>;
   }>({
     // Configurações do cronograma
     dataInicio: '2024-01-15',
@@ -115,38 +127,6 @@ export default function CronogramaPage() {
     }
   ]);
 
-  const [eventos] = useState([
-    {
-      id: 1,
-      titulo: 'Direito Constitucional - Módulo 5',
-      materia: 'Direito Constitucional',
-      data: '2024-01-20',
-      hora: '09:00',
-      duracao: 2,
-      tipo: 'estudo',
-      concluido: false
-    },
-    {
-      id: 2,
-      titulo: 'Simulado: Português',
-      materia: 'Português',
-      data: '2024-01-21',
-      hora: '14:00',
-      duracao: 3,
-      tipo: 'simulado',
-      concluido: false
-    },
-    {
-      id: 3,
-      titulo: 'Revisão: Direito Penal',
-      materia: 'Direito Penal',
-      data: '2024-01-22',
-      hora: '16:00',
-      duracao: 1.5,
-      tipo: 'revisao',
-      concluido: true
-    }
-  ]);
 
   const handleInputChange = (field: string, value: any) => {
     setCronograma(prev => ({
@@ -190,12 +170,24 @@ export default function CronogramaPage() {
     }));
 
     // Gerar cronograma semanal
-    const cronogramaAutomatico = [];
+    const cronogramaAutomatico: Array<{
+      semana: number;
+      dias: Array<{
+        nome: string;
+        data: string;
+        materias: Array<{
+          nome: string;
+          horas: number;
+          peso: number;
+          tipo: string;
+        }>;
+      }>;
+    }> = [];
     const diasSemana = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
     
     for (let semana = 0; semana < Math.ceil(diasEstudo / 7); semana++) {
       const semanaData = {
-        numero: semana + 1,
+        semana: semana + 1,
         dias: []
       };
 
