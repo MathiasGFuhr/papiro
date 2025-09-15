@@ -55,23 +55,23 @@ export default function CronogramaPage() {
       ]
     },
     {
-      id: 'policia-militar',
-      nome: 'Polícia Militar',
-      descricao: 'Oficial, Soldado',
+      id: 'prf',
+      nome: 'PRF - Polícia Rodoviária Federal',
+      descricao: 'Policial Rodoviário Federal',
       materias: [
         { nome: 'Direito Constitucional', peso: 20, horasBase: 100 },
-        { nome: 'Direito Administrativo', peso: 15, horasBase: 80 },
+        { nome: 'Direito Administrativo', peso: 20, horasBase: 100 },
         { nome: 'Direito Penal', peso: 15, horasBase: 80 },
         { nome: 'Direito Processual Penal', peso: 15, horasBase: 80 },
         { nome: 'Direito Civil', peso: 10, horasBase: 60 },
         { nome: 'Português', peso: 10, horasBase: 60 },
-        { nome: 'Matemática', peso: 10, horasBase: 60 },
-        { nome: 'Informática', peso: 5, horasBase: 40 }
+        { nome: 'Informática', peso: 5, horasBase: 40 },
+        { nome: 'Legislação de Trânsito', peso: 5, horasBase: 40 }
       ]
     },
     {
-      id: 'policia-federal',
-      nome: 'Polícia Federal',
+      id: 'pf',
+      nome: 'PF - Polícia Federal',
       descricao: 'Delegado, Agente, Escrivão',
       materias: [
         { nome: 'Direito Constitucional', peso: 20, horasBase: 120 },
@@ -85,17 +85,17 @@ export default function CronogramaPage() {
       ]
     },
     {
-      id: 'receita-federal',
-      nome: 'Receita Federal',
-      descricao: 'Auditor Fiscal',
+      id: 'depen',
+      nome: 'DEPEN - Departamento Penitenciário',
+      descricao: 'Agente Penitenciário Federal',
       materias: [
-        { nome: 'Direito Tributário', peso: 30, horasBase: 150 },
-        { nome: 'Direito Constitucional', peso: 15, horasBase: 80 },
-        { nome: 'Direito Administrativo', peso: 15, horasBase: 80 },
+        { nome: 'Direito Constitucional', peso: 20, horasBase: 100 },
+        { nome: 'Direito Administrativo', peso: 20, horasBase: 100 },
+        { nome: 'Direito Penal', peso: 20, horasBase: 100 },
+        { nome: 'Direito Processual Penal', peso: 15, horasBase: 80 },
         { nome: 'Direito Civil', peso: 10, horasBase: 60 },
         { nome: 'Português', peso: 10, horasBase: 60 },
-        { nome: 'Matemática', peso: 10, horasBase: 60 },
-        { nome: 'Informática', peso: 10, horasBase: 60 }
+        { nome: 'Informática', peso: 5, horasBase: 40 }
       ]
     }
   ]);
