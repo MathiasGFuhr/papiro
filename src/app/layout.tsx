@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: 'Papiro Tático',
     images: [
       {
-        url: '/favicon.svg',
+        url: '/imagens/Logo3d.png',
         width: 512,
         height: 512,
         alt: 'Papiro Tático - Sistema de Controle de Estudos',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Papiro Tático - Sistema Inteligente de Controle de Estudos",
     description: "Domine os concursos da PF, PRF, Polícia Civil e DEPEN com IA. Cronograma automático e análise de progresso.",
-    images: ['/favicon.svg'],
+    images: ['/imagens/Logo3d.png'],
   },
   robots: {
     index: true,
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/favicon.png",
+    icon: "/imagens/Logo3d.png",
+    shortcut: "/imagens/Logo3d.png",
+    apple: "/imagens/Logo3d.png",
   },
 };
 
@@ -79,9 +79,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="/imagens/Logo3d.png" type="image/png" />
+        <link rel="shortcut icon" href="/imagens/Logo3d.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/imagens/Logo3d.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#dc2626" />
         <meta name="mobile-web-app-capable" content="yes" />
