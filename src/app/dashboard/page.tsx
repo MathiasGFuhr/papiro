@@ -20,7 +20,7 @@ export default function DashboardPage() {
 
   const menuItems = [
     { 
-      name: 'Dashboard', 
+      name: 'Visão Geral', 
       href: '/dashboard', 
       icon: '🏠',
       active: pathname === '/dashboard'
@@ -124,7 +124,7 @@ export default function DashboardPage() {
                 <h1 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   Papiro Tático
                 </h1>
-                <p className="text-xs text-gray-400">Dashboard</p>
+                <p className="text-xs text-gray-400">Sistema de Estudos</p>
               </div>
             </div>
           </div>
@@ -212,9 +212,9 @@ export default function DashboardPage() {
               {/* Page Title */}
               <div className="flex-1 lg:flex-none">
                 <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  Dashboard
+                  Visão Geral
                 </h2>
-                <p className="text-sm text-gray-400">Visão geral do seu progresso</p>
+                <p className="text-sm text-gray-400">Dashboard do seu progresso</p>
               </div>
 
               {/* Quick Actions */}
