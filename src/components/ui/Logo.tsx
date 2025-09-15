@@ -27,8 +27,7 @@ export const Logo = memo(({ size = 'md', showText = true, className = '' }: Logo
           style={{ 
             width: currentSize.width, 
             height: currentSize.height,
-            maxWidth: '100%',
-            height: 'auto'
+            maxWidth: '100%'
           }}
         />
       </div>
