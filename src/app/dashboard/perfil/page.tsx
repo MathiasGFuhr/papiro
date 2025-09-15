@@ -216,15 +216,6 @@ export default function PerfilPage() {
     }
   };
 
-  const getTipoIcon = (tipo: string) => {
-    switch (tipo) {
-      case 'conquista': return '🏆';
-      case 'nivel': return '🎉';
-      case 'simulado': return '📝';
-      case 'estudo': return '📚';
-      default: return '📅';
-    }
-  };
 
   const getTipoColor = (tipo: string) => {
     switch (tipo) {

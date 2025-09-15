@@ -22,7 +22,22 @@ export default function CronogramaPage() {
   });
 
   // Estado do cronograma
-  const [cronograma, setCronograma] = useState({
+  const [cronograma, setCronograma] = useState<{
+    dataInicio: string;
+    dataFim: string;
+    horasPorDia: number;
+    diasPorSemana: number;
+    concursoSelecionado: string;
+    cronogramaGerado: boolean;
+    materias: Array<{
+      nome: string;
+      peso: number;
+      horasBase: number;
+      horas: number;
+      concluido: number;
+    }>;
+    cronogramaAutomatico: Array<any>;
+  }>({
     // Configurações do cronograma
     dataInicio: '2024-01-15',
     dataFim: '2024-12-15',
@@ -99,16 +114,6 @@ export default function CronogramaPage() {
       ]
     }
   ]);
-
-  const [novoEvento, setNovoEvento] = useState({
-    titulo: '',
-    materia: '',
-    data: '',
-    hora: '',
-    duracao: 2,
-    tipo: 'estudo',
-    descricao: ''
-  });
 
   const [eventos] = useState([
     {
@@ -311,25 +316,6 @@ export default function CronogramaPage() {
 
   const currentAvatar = getAvatarByLevel(user.level);
 
-  const getTipoIcon = (tipo: string) => {
-    switch (tipo) {
-      case 'estudo': return '📚';
-      case 'simulado': return '📝';
-      case 'revisao': return '🔄';
-      case 'prova': return '📋';
-      default: return '📅';
-    }
-  };
-
-  const getTipoColor = (tipo: string) => {
-    switch (tipo) {
-      case 'estudo': return 'from-blue-500 to-cyan-500';
-      case 'simulado': return 'from-green-500 to-emerald-500';
-      case 'revisao': return 'from-purple-500 to-pink-500';
-      case 'prova': return 'from-orange-500 to-red-500';
-      default: return 'from-gray-500 to-gray-600';
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex">
