@@ -15,7 +15,11 @@ export default function DashboardPage() {
     email: 'carlos@papirotatico.com',
     plan: 'Premium',
     progress: 78,
-    avatar: 'CS'
+    avatar: 'CS',
+    level: 12,
+    xp: 2450,
+    nextLevelXp: 3000,
+    avatarStyle: 'warrior' // warrior, mage, archer, scholar
   });
 
   const menuItems = [
@@ -101,6 +105,19 @@ export default function DashboardPage() {
     { day: 'Dom', hours: 0, completed: false }
   ]);
 
+  // Sistema de Avatares por Nível
+  const getAvatarByLevel = (level: number) => {
+    if (level >= 1 && level <= 5) return { emoji: '🥉', title: 'Iniciante', color: 'from-gray-500 to-gray-600' };
+    if (level >= 6 && level <= 10) return { emoji: '🥈', title: 'Aprendiz', color: 'from-blue-500 to-blue-600' };
+    if (level >= 11 && level <= 15) return { emoji: '⚔️', title: 'Guerreiro', color: 'from-purple-500 to-purple-600' };
+    if (level >= 16 && level <= 20) return { emoji: '🏆', title: 'Campeão', color: 'from-yellow-500 to-orange-500' };
+    if (level >= 21 && level <= 25) return { emoji: '👑', title: 'Mestre', color: 'from-red-500 to-pink-500' };
+    if (level >= 26 && level <= 30) return { emoji: '🌟', title: 'Lenda', color: 'from-indigo-500 to-purple-600' };
+    return { emoji: '💎', title: 'Supremo', color: 'from-cyan-500 to-blue-600' };
+  };
+
+  const currentAvatar = getAvatarByLevel(user.level);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex">
       {/* Mobile Overlay */}
@@ -129,20 +146,37 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* User Profile Section */}
+          {/* Avatar & Level Section */}
           <div className="p-6 border-b border-white/10">
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white text-lg font-bold">{user.avatar}</span>
+            <div className="text-center">
+              {/* Avatar Simples */}
+              <div className="relative mx-auto mb-4 w-16 h-16">
+                <div className={`w-16 h-16 bg-gradient-to-br ${currentAvatar.color} rounded-full flex items-center justify-center shadow-lg`}>
+                  <span className="text-2xl">{currentAvatar.emoji}</span>
                 </div>
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-900"></div>
+                {/* Level Badge */}
+                <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">{user.level}</span>
+                </div>
               </div>
-              <div className="flex-1">
+              
+              {/* User Info */}
+              <div className="mb-3">
                 <p className="text-sm font-medium text-white">{user.name}</p>
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs text-gray-400">{user.plan}</span>
-                  <div className="w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
+                <p className="text-xs text-gray-400">{currentAvatar.title}</p>
+              </div>
+              
+              {/* XP Progress Simples */}
+              <div className="space-y-1">
+                <div className="flex justify-between text-xs text-gray-400">
+                  <span>{user.xp} XP</span>
+                  <span>{user.nextLevelXp - user.xp} restante</span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-1.5">
+                  <div 
+                    className="bg-green-500 h-1.5 rounded-full transition-all duration-500"
+                    style={{ width: `${(user.xp / user.nextLevelXp) * 100}%` }}
+                  ></div>
                 </div>
               </div>
             </div>
