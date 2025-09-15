@@ -28,18 +28,77 @@ export default function CronogramaPage() {
     dataFim: '2024-12-15',
     horasPorDia: 4,
     diasPorSemana: 6,
+    concursoSelecionado: '',
+    cronogramaGerado: false,
     
-    // Matérias
-    materias: [
-      { id: 1, nome: 'Direito Constitucional', peso: 25, horas: 120, concluido: 45 },
-      { id: 2, nome: 'Direito Administrativo', peso: 20, horas: 100, concluido: 30 },
-      { id: 3, nome: 'Direito Penal', peso: 15, horas: 80, concluido: 20 },
-      { id: 4, nome: 'Direito Processual Penal', peso: 15, horas: 80, concluido: 15 },
-      { id: 5, nome: 'Direito Civil', peso: 10, horas: 60, concluido: 10 },
-      { id: 6, nome: 'Direito Processual Civil', peso: 10, horas: 60, concluido: 5 },
-      { id: 7, nome: 'Português', peso: 5, horas: 40, concluido: 25 }
-    ]
+    // Matérias (serão preenchidas automaticamente baseadas no concurso)
+    materias: [],
+    
+    // Cronograma gerado automaticamente
+    cronogramaAutomatico: []
   });
+
+  // Concursos disponíveis
+  const [concursos] = useState([
+    {
+      id: 'policia-civil',
+      nome: 'Polícia Civil',
+      descricao: 'Delegado, Investigador, Escrivão',
+      materias: [
+        { nome: 'Direito Constitucional', peso: 25, horasBase: 120 },
+        { nome: 'Direito Administrativo', peso: 20, horasBase: 100 },
+        { nome: 'Direito Penal', peso: 15, horasBase: 80 },
+        { nome: 'Direito Processual Penal', peso: 15, horasBase: 80 },
+        { nome: 'Direito Civil', peso: 10, horasBase: 60 },
+        { nome: 'Direito Processual Civil', peso: 10, horasBase: 60 },
+        { nome: 'Português', peso: 5, horasBase: 40 }
+      ]
+    },
+    {
+      id: 'policia-militar',
+      nome: 'Polícia Militar',
+      descricao: 'Oficial, Soldado',
+      materias: [
+        { nome: 'Direito Constitucional', peso: 20, horasBase: 100 },
+        { nome: 'Direito Administrativo', peso: 15, horasBase: 80 },
+        { nome: 'Direito Penal', peso: 15, horasBase: 80 },
+        { nome: 'Direito Processual Penal', peso: 15, horasBase: 80 },
+        { nome: 'Direito Civil', peso: 10, horasBase: 60 },
+        { nome: 'Português', peso: 10, horasBase: 60 },
+        { nome: 'Matemática', peso: 10, horasBase: 60 },
+        { nome: 'Informática', peso: 5, horasBase: 40 }
+      ]
+    },
+    {
+      id: 'policia-federal',
+      nome: 'Polícia Federal',
+      descricao: 'Delegado, Agente, Escrivão',
+      materias: [
+        { nome: 'Direito Constitucional', peso: 20, horasBase: 120 },
+        { nome: 'Direito Administrativo', peso: 20, horasBase: 120 },
+        { nome: 'Direito Penal', peso: 15, horasBase: 100 },
+        { nome: 'Direito Processual Penal', peso: 15, horasBase: 100 },
+        { nome: 'Direito Civil', peso: 10, horasBase: 80 },
+        { nome: 'Direito Processual Civil', peso: 10, horasBase: 80 },
+        { nome: 'Português', peso: 5, horasBase: 60 },
+        { nome: 'Informática', peso: 5, horasBase: 60 }
+      ]
+    },
+    {
+      id: 'receita-federal',
+      nome: 'Receita Federal',
+      descricao: 'Auditor Fiscal',
+      materias: [
+        { nome: 'Direito Tributário', peso: 30, horasBase: 150 },
+        { nome: 'Direito Constitucional', peso: 15, horasBase: 80 },
+        { nome: 'Direito Administrativo', peso: 15, horasBase: 80 },
+        { nome: 'Direito Civil', peso: 10, horasBase: 60 },
+        { nome: 'Português', peso: 10, horasBase: 60 },
+        { nome: 'Matemática', peso: 10, horasBase: 60 },
+        { nome: 'Informática', peso: 10, horasBase: 60 }
+      ]
+    }
+  ]);
 
   const [novoEvento, setNovoEvento] = useState({
     titulo: '',
@@ -91,34 +150,101 @@ export default function CronogramaPage() {
     }));
   };
 
-  const handleNovoEventoChange = (field: string, value: any) => {
-    setNovoEvento(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const adicionarEvento = () => {
-    if (novoEvento.titulo && novoEvento.data && novoEvento.hora) {
-      console.log('Novo evento adicionado:', novoEvento);
-      setNovoEvento({
-        titulo: '',
-        materia: '',
-        data: '',
-        hora: '',
-        duracao: 2,
-        tipo: 'estudo',
-        descricao: ''
-      });
-      alert('Evento adicionado com sucesso!');
-    } else {
-      alert('Preencha todos os campos obrigatórios!');
+  const selecionarConcurso = (concursoId: string) => {
+    const concurso = concursos.find(c => c.id === concursoId);
+    if (concurso) {
+      setCronograma(prev => ({
+        ...prev,
+        concursoSelecionado: concursoId,
+        materias: concurso.materias.map(materia => ({
+          ...materia,
+          horas: materia.horasBase,
+          concluido: 0
+        }))
+      }));
     }
   };
 
-  const marcarConcluido = (eventoId: number) => {
-    console.log('Evento concluído:', eventoId);
-    alert('Evento marcado como concluído!');
+  const gerarCronogramaAutomatico = () => {
+    if (!cronograma.concursoSelecionado || !cronograma.dataInicio || !cronograma.dataFim) {
+      alert('Selecione um concurso e defina as datas de início e fim!');
+      return;
+    }
+
+    const dataInicio = new Date(cronograma.dataInicio);
+    const dataFim = new Date(cronograma.dataFim);
+    const diasTotais = Math.ceil((dataFim.getTime() - dataInicio.getTime()) / (1000 * 60 * 60 * 24));
+    const diasEstudo = Math.floor(diasTotais * (cronograma.diasPorSemana / 7));
+    const horasTotais = diasEstudo * cronograma.horasPorDia;
+
+    // Calcular horas por matéria baseado no peso
+    const totalPeso = cronograma.materias.reduce((sum, materia) => sum + materia.peso, 0);
+    const materiasComHoras = cronograma.materias.map(materia => ({
+      ...materia,
+      horasCalculadas: Math.round((materia.peso / totalPeso) * horasTotais)
+    }));
+
+    // Gerar cronograma semanal
+    const cronogramaAutomatico = [];
+    const diasSemana = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+    
+    for (let semana = 0; semana < Math.ceil(diasEstudo / 7); semana++) {
+      const semanaData = {
+        numero: semana + 1,
+        dias: []
+      };
+
+      for (let dia = 0; dia < Math.min(7, diasEstudo - (semana * 7)); dia++) {
+        if (dia < cronograma.diasPorSemana) {
+          const dataAtual = new Date(dataInicio);
+          dataAtual.setDate(dataInicio.getDate() + (semana * 7) + dia);
+          
+          const diaData = {
+            nome: diasSemana[dia],
+            data: dataAtual.toISOString().split('T')[0],
+            materias: []
+          };
+
+          // Distribuir matérias ao longo do dia
+          const horasPorMateria = Math.floor(cronograma.horasPorDia / materiasComHoras.length);
+          const horasRestantes = cronograma.horasPorDia % materiasComHoras.length;
+
+          materiasComHoras.forEach((materia, index) => {
+            const horas = horasPorMateria + (index < horasRestantes ? 1 : 0);
+            if (horas > 0) {
+              diaData.materias.push({
+                nome: materia.nome,
+                horas: horas,
+                peso: materia.peso,
+                tipo: 'estudo'
+              });
+            }
+          });
+
+          semanaData.dias.push(diaData);
+        }
+      }
+
+      cronogramaAutomatico.push(semanaData);
+    }
+
+    setCronograma(prev => ({
+      ...prev,
+      cronogramaAutomatico,
+      cronogramaGerado: true
+    }));
+
+    alert('Cronograma gerado com sucesso!');
+  };
+
+  const resetarCronograma = () => {
+    setCronograma(prev => ({
+      ...prev,
+      concursoSelecionado: '',
+      materias: [],
+      cronogramaAutomatico: [],
+      cronogramaGerado: false
+    }));
   };
 
   const menuItems = [
@@ -335,17 +461,23 @@ export default function CronogramaPage() {
 
               {/* Quick Actions */}
               <div className="flex items-center space-x-4">
-                <Button
-                  variant="outline"
-                  className="border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
-                >
-                  Exportar
-                </Button>
-                <Button
-                  className="bg-red-600 hover:bg-red-700 text-white"
-                >
-                  Novo Evento
-                </Button>
+                {cronograma.cronogramaGerado && (
+                  <Button
+                    variant="outline"
+                    onClick={resetarCronograma}
+                    className="border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >
+                    Resetar
+                  </Button>
+                )}
+                {cronograma.concursoSelecionado && !cronograma.cronogramaGerado && (
+                  <Button
+                    onClick={gerarCronogramaAutomatico}
+                    className="bg-red-600 hover:bg-red-700 text-white"
+                  >
+                    Gerar Cronograma
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -355,235 +487,252 @@ export default function CronogramaPage() {
         <main className="flex-1 overflow-y-auto">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              {/* Total de Horas */}
-              <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-400">Total de Horas</p>
-                    <p className="text-2xl font-bold text-white">540h</p>
-                  </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Progresso Geral */}
-              <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-400">Progresso</p>
-                    <p className="text-2xl font-bold text-white">32%</p>
-                  </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Eventos Hoje */}
-              <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-400">Hoje</p>
-                    <p className="text-2xl font-bold text-white">3</p>
-                  </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Streak */}
-              <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-400">Streak</p>
-                    <p className="text-2xl font-bold text-white">23</p>
-                  </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-              
-              {/* Calendário e Eventos */}
-              <div className="xl:col-span-2 space-y-6">
+            {!cronograma.cronogramaGerado ? (
+              // Configuração do Cronograma
+              <div className="space-y-8">
                 
-                {/* Próximos Eventos */}
+                {/* Seleção de Concurso */}
                 <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-8">
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-white">Próximos Eventos</h3>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-sm text-gray-300">Ativo</span>
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg mr-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Selecione o Concurso</h3>
+                      <p className="text-sm text-gray-400">Escolha o concurso que você está estudando</p>
                     </div>
                   </div>
                   
-                  <div className="space-y-4">
-                    {eventos.map((evento) => (
-                      <div key={evento.id} className={`p-4 rounded-xl border transition-all duration-200 ${
-                        evento.concluido 
-                          ? 'bg-gray-700/30 border-gray-600' 
-                          : 'bg-white/5 border-gray-600 hover:bg-white/10'
-                      }`}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4">
-                            <div className={`w-10 h-10 bg-gradient-to-br ${getTipoColor(evento.tipo)} rounded-lg flex items-center justify-center`}>
-                              <span className="text-lg">{getTipoIcon(evento.tipo)}</span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {concursos.map((concurso) => (
+                      <div
+                        key={concurso.id}
+                        onClick={() => selecionarConcurso(concurso.id)}
+                        className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+                          cronograma.concursoSelecionado === concurso.id
+                            ? 'border-red-500 bg-red-500/10'
+                            : 'border-gray-600 bg-gray-700/30 hover:border-gray-500 hover:bg-gray-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="text-lg font-semibold text-white">{concurso.nome}</h4>
+                          {cronograma.concursoSelecionado === concurso.id && (
+                            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
                             </div>
-                            <div>
-                              <h4 className={`font-medium ${evento.concluido ? 'text-gray-400 line-through' : 'text-white'}`}>
-                                {evento.titulo}
-                              </h4>
-                              <p className="text-sm text-gray-400">
-                                {evento.data} às {evento.hora} • {evento.duracao}h • {evento.materia}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            {!evento.concluido && (
-                              <button
-                                onClick={() => marcarConcluido(evento.id)}
-                                className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors"
-                              >
-                                Concluir
-                              </button>
-                            )}
-                            {evento.concluido && (
-                              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                              </div>
-                            )}
-                          </div>
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-400 mb-3">{concurso.descricao}</p>
+                        <div className="text-xs text-gray-500">
+                          {concurso.materias.length} matérias • {concurso.materias.reduce((sum, m) => sum + m.horasBase, 0)}h total
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Novo Evento */}
+                {/* Configurações do Cronograma */}
+                {cronograma.concursoSelecionado && (
+                  <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-8">
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg mr-4">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Configurações do Cronograma</h3>
+                        <p className="text-sm text-gray-400">Defina suas preferências de estudo</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Data de Início</label>
+                        <input
+                          type="date"
+                          value={cronograma.dataInicio}
+                          onChange={(e) => handleInputChange('dataInicio', e.target.value)}
+                          className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Data de Fim</label>
+                        <input
+                          type="date"
+                          value={cronograma.dataFim}
+                          onChange={(e) => handleInputChange('dataFim', e.target.value)}
+                          className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Horas por Dia</label>
+                        <select
+                          value={cronograma.horasPorDia}
+                          onChange={(e) => handleInputChange('horasPorDia', parseInt(e.target.value))}
+                          className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                          <option value={2}>2 horas</option>
+                          <option value={3}>3 horas</option>
+                          <option value={4}>4 horas</option>
+                          <option value={5}>5 horas</option>
+                          <option value={6}>6 horas</option>
+                          <option value={8}>8 horas</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-6">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Dias por Semana</label>
+                      <select
+                        value={cronograma.diasPorSemana}
+                        onChange={(e) => handleInputChange('diasPorSemana', parseInt(e.target.value))}
+                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value={3}>3 dias</option>
+                        <option value={4}>4 dias</option>
+                        <option value={5}>5 dias</option>
+                        <option value={6}>6 dias</option>
+                        <option value={7}>7 dias</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {/* Matérias do Concurso */}
+                {cronograma.concursoSelecionado && cronograma.materias.length > 0 && (
+                  <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-8">
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg mr-4">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Matérias do Concurso</h3>
+                        <p className="text-sm text-gray-400">Pesos e horas calculados automaticamente</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {cronograma.materias.map((materia, index) => (
+                        <div key={index} className="p-4 bg-gray-700/30 rounded-xl border border-gray-600">
+                          <div className="flex justify-between items-center mb-2">
+                            <h4 className="text-white font-medium">{materia.nome}</h4>
+                            <span className="text-sm text-gray-400">{materia.peso}%</span>
+                          </div>
+                          <div className="text-sm text-gray-400">
+                            {materia.horasBase} horas base
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+              </div>
+            ) : (
+              // Cronograma Gerado
+              <div className="space-y-8">
+                
+                {/* Resumo do Cronograma */}
                 <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-8">
-                  <h3 className="text-xl font-bold text-white mb-6">Adicionar Novo Evento</h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Título</label>
-                      <input
-                        type="text"
-                        value={novoEvento.titulo}
-                        onChange={(e) => handleNovoEventoChange('titulo', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Ex: Direito Constitucional - Módulo 5"
-                      />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg mr-4">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Cronograma Gerado</h3>
+                        <p className="text-sm text-gray-400">Seu plano de estudos personalizado</p>
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Matéria</label>
-                      <select
-                        value={novoEvento.materia}
-                        onChange={(e) => handleNovoEventoChange('materia', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Selecione uma matéria</option>
-                        {cronograma.materias.map((materia) => (
-                          <option key={materia.id} value={materia.nome}>{materia.nome}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Data</label>
-                      <input
-                        type="date"
-                        value={novoEvento.data}
-                        onChange={(e) => handleNovoEventoChange('data', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Hora</label>
-                      <input
-                        type="time"
-                        value={novoEvento.hora}
-                        onChange={(e) => handleNovoEventoChange('hora', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Duração (horas)</label>
-                      <select
-                        value={novoEvento.duracao}
-                        onChange={(e) => handleNovoEventoChange('duracao', parseFloat(e.target.value))}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value={0.5}>30 min</option>
-                        <option value={1}>1 hora</option>
-                        <option value={1.5}>1h 30min</option>
-                        <option value={2}>2 horas</option>
-                        <option value={3}>3 horas</option>
-                        <option value={4}>4 horas</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Tipo</label>
-                      <select
-                        value={novoEvento.tipo}
-                        onChange={(e) => handleNovoEventoChange('tipo', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="estudo">Estudo</option>
-                        <option value="simulado">Simulado</option>
-                        <option value="revisao">Revisão</option>
-                        <option value="prova">Prova</option>
-                      </select>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-sm text-gray-300">Ativo</span>
                     </div>
                   </div>
                   
-                  <div className="mt-6">
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Descrição</label>
-                    <textarea
-                      value={novoEvento.descricao}
-                      onChange={(e) => handleNovoEventoChange('descricao', e.target.value)}
-                      rows={3}
-                      className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Adicione uma descrição opcional..."
-                    />
-                  </div>
-                  
-                  <div className="mt-6 flex justify-end">
-                    <Button
-                      onClick={adicionarEvento}
-                      className="bg-red-600 hover:bg-red-700 text-white"
-                    >
-                      Adicionar Evento
-                    </Button>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white mb-1">
+                        {cronograma.cronogramaAutomatico.length}
+                      </div>
+                      <div className="text-sm text-gray-400">Semanas</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white mb-1">
+                        {cronograma.cronogramaAutomatico.reduce((sum, semana) => sum + semana.dias.length, 0)}
+                      </div>
+                      <div className="text-sm text-gray-400">Dias de Estudo</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white mb-1">
+                        {cronograma.cronogramaAutomatico.reduce((sum, semana) => 
+                          sum + semana.dias.reduce((diaSum, dia) => 
+                            diaSum + dia.materias.reduce((materiaSum, materia) => materiaSum + materia.horas, 0), 0
+                          ), 0
+                        )}h
+                      </div>
+                      <div className="text-sm text-gray-400">Horas Totais</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white mb-1">
+                        {cronograma.horasPorDia}h
+                      </div>
+                      <div className="text-sm text-gray-400">Por Dia</div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Sidebar */}
-              <div className="space-y-6">
-                
+                {/* Cronograma Semanal */}
+                <div className="space-y-6">
+                  {cronograma.cronogramaAutomatico.slice(0, 4).map((semana, semanaIndex) => (
+                    <div key={semanaIndex} className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <h3 className="text-lg font-bold text-white">Semana {semana.numero}</h3>
+                        <div className="text-sm text-gray-400">
+                          {semana.dias.length} dias • {semana.dias.reduce((sum, dia) => 
+                            sum + dia.materias.reduce((materiaSum, materia) => materiaSum + materia.horas, 0), 0
+                          )}h total
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {semana.dias.map((dia, diaIndex) => (
+                          <div key={diaIndex} className="p-4 bg-gray-700/30 rounded-xl border border-gray-600">
+                            <div className="flex items-center justify-between mb-3">
+                              <h4 className="text-white font-medium">{dia.nome}</h4>
+                              <span className="text-xs text-gray-400">{dia.data}</span>
+                            </div>
+                            <div className="space-y-2">
+                              {dia.materias.map((materia, materiaIndex) => (
+                                <div key={materiaIndex} className="flex items-center justify-between p-2 bg-gray-600/30 rounded-lg">
+                                  <span className="text-sm text-gray-300 truncate">{materia.nome}</span>
+                                  <span className="text-xs text-gray-400">{materia.horas}h</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
                 {/* Progresso por Matéria */}
-                <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-6">
-                  <h3 className="text-lg font-bold text-white mb-4">Progresso por Matéria</h3>
-                  <div className="space-y-4">
-                    {cronograma.materias.map((materia) => (
-                      <div key={materia.id} className="space-y-2">
+                <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-8">
+                  <h3 className="text-lg font-bold text-white mb-6">Progresso por Matéria</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {cronograma.materias.map((materia, index) => (
+                      <div key={index} className="space-y-2">
                         <div className="flex justify-between items-center">
                           <span className="text-sm text-gray-300">{materia.nome}</span>
                           <span className="text-sm text-gray-400">{materia.concluido}/{materia.horas}h</span>
@@ -595,61 +744,15 @@ export default function CronogramaPage() {
                           ></div>
                         </div>
                         <div className="text-xs text-gray-400">
-                          {Math.round((materia.concluido / materia.horas) * 100)}% concluído
+                          {Math.round((materia.concluido / materia.horas) * 100)}% concluído • {materia.peso}% peso
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Configurações do Cronograma */}
-                <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-6">
-                  <h3 className="text-lg font-bold text-white mb-4">Configurações</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Horas por Dia</label>
-                      <select
-                        value={cronograma.horasPorDia}
-                        onChange={(e) => handleInputChange('horasPorDia', parseInt(e.target.value))}
-                        className="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value={2}>2 horas</option>
-                        <option value={3}>3 horas</option>
-                        <option value={4}>4 horas</option>
-                        <option value={5}>5 horas</option>
-                        <option value={6}>6 horas</option>
-                        <option value={8}>8 horas</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Dias por Semana</label>
-                      <select
-                        value={cronograma.diasPorSemana}
-                        onChange={(e) => handleInputChange('diasPorSemana', parseInt(e.target.value))}
-                        className="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value={3}>3 dias</option>
-                        <option value={4}>4 dias</option>
-                        <option value={5}>5 dias</option>
-                        <option value={6}>6 dias</option>
-                        <option value={7}>7 dias</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Dicas */}
-                <div className="bg-gray-800 backdrop-blur-xl border border-gray-700 rounded-2xl p-6">
-                  <h3 className="text-lg font-bold text-white mb-4">💡 Dicas</h3>
-                  <div className="space-y-3 text-sm text-gray-300">
-                    <p>• Mantenha uma rotina consistente de estudos</p>
-                    <p>• Faça pausas regulares para melhorar a concentração</p>
-                    <p>• Revise o conteúdo 24h após o estudo</p>
-                    <p>• Use a técnica Pomodoro (25min estudo + 5min pausa)</p>
-                  </div>
-                </div>
               </div>
-            </div>
+            )}
           </div>
         </main>
       </div>
