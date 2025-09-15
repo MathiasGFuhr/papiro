@@ -62,16 +62,16 @@ export const Header = () => {
                 size="sm"
                 className="border-gray-400 text-gray-300 hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
               >
-                Entrar
-              </Button>
+              Entrar
+            </Button>
             </Link>
             <Link href="/register">
               <Button 
                 size="sm"
                 className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
               >
-                Começar Grátis
-              </Button>
+              Começar Grátis
+            </Button>
             </Link>
           </div>
 
@@ -148,16 +148,16 @@ export const Header = () => {
                     size="sm" 
                     className="w-full border-gray-400 text-gray-300 hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
                   >
-                    Entrar
-                  </Button>
+                  Entrar
+                </Button>
                 </Link>
                 <Link href="/register" className="w-full">
                   <Button 
                     size="sm" 
                     className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    Começar Grátis
-                  </Button>
+                  Começar Grátis
+                </Button>
                 </Link>
               </div>
             </nav>

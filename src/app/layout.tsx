@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Analytics from "@/components/Analytics";
-import { StructuredData } from "@/components/StructuredData";
-import { PreloadResources } from "@/components/PreloadResources";
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
@@ -89,11 +81,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Papiro Tático" />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900`}
+        className={`${inter.variable} antialiased bg-white text-gray-900`}
       >
-        <PreloadResources />
-        <StructuredData />
-        <Analytics />
         {children}
       </body>
     </html>
