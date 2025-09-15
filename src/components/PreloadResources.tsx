@@ -14,6 +14,7 @@ export const PreloadResources = () => {
     const preloadImages = () => {
       const imageUrls = [
         '/imagens/Logo3d.png',
+        '/favicon.svg',
         '/vercel.svg',
       ];
 
