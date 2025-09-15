@@ -10,11 +10,11 @@ export default function DashboardPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [user] = useState({
-    name: 'Carlos Silva',
-    email: 'carlos@papirotatico.com',
+    name: 'Mathias Fuhr',
+    email: 'mathias@papirotatico.com',
     plan: 'Premium',
     progress: 78,
-    avatar: 'CS',
+    avatar: 'MF',
     level: 12,
     xp: 2450,
     nextLevelXp: 3000,

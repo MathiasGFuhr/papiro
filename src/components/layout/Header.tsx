@@ -2,6 +2,7 @@
 
 import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
+import InstallPWA from '../ui/InstallPWA';
 import { NAVIGATION_ITEMS } from '../../constants';
 import { useMobileMenu } from '../../hooks/useMobileMenu';
 import Link from 'next/link';
@@ -56,6 +57,7 @@ export const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-4">
+            <InstallPWA />
             <Link href="/login">
               <Button 
                 variant="outline" 
@@ -142,14 +144,17 @@ export const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-3 pt-4 px-4">
+                <div className="px-4">
+                  <InstallPWA />
+                </div>
                 <Link href="/login" className="w-full">
                   <Button 
                     variant="outline" 
-                    size="sm" 
+                    size="sm"
                     className="w-full border-gray-400 text-gray-300 hover:bg-gray-100 hover:text-gray-800 hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
                   >
-                  Entrar
-                </Button>
+                    Entrar
+                  </Button>
                 </Link>
                 <Link href="/register" className="w-full">
                   <Button 

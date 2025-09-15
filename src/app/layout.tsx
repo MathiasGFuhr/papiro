@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { PWAProvider } from "@/components/providers/PWAProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -77,13 +78,20 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#dc2626" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Papiro Tático" />
+        <meta name="application-name" content="Papiro Tático" />
+        <meta name="msapplication-TileColor" content="#dc2626" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
       </head>
       <body
         className={`${inter.variable} antialiased bg-white text-gray-900`}
       >
-        {children}
+        <PWAProvider>
+          {children}
+        </PWAProvider>
       </body>
     </html>
   );

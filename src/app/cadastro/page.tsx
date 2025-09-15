@@ -203,11 +203,11 @@ export default function CadastroPage() {
               <label htmlFor="acceptTerms" className="ml-2 block text-sm text-gray-300">
                 Eu aceito os{' '}
                 <Link href="/termos" className="text-red-400 hover:text-red-300">
-                  Termos de Uso
-                </Link>
+              Termos de Uso
+            </Link>
                 {' '}e a{' '}
                 <Link href="/privacidade" className="text-red-400 hover:text-red-300">
-                  Política de Privacidade
+              Política de Privacidade
                 </Link>
               </label>
             </div>
@@ -245,8 +245,8 @@ export default function CadastroPage() {
                 className="text-red-400 hover:text-red-300 font-medium transition-colors"
               >
                 Faça login aqui
-              </Link>
-            </p>
+            </Link>
+          </p>
           </div>
         </div>
 
