@@ -2,10 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
 
 export default function DashboardPage() {
+  const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [user, setUser] = useState({
     name: 'Carlos Silva',
     email: 'carlos@papirotatico.com',
@@ -13,6 +17,57 @@ export default function DashboardPage() {
     progress: 78,
     avatar: 'CS'
   });
+
+  const menuItems = [
+    { 
+      name: 'Dashboard', 
+      href: '/dashboard', 
+      icon: '🏠',
+      active: pathname === '/dashboard'
+    },
+    { 
+      name: 'Cronograma', 
+      href: '/dashboard/cronograma', 
+      icon: '📅',
+      active: pathname === '/dashboard/cronograma'
+    },
+    { 
+      name: 'Progresso', 
+      href: '/dashboard/progresso', 
+      icon: '📊',
+      active: pathname === '/dashboard/progresso'
+    },
+    { 
+      name: 'Concursos', 
+      href: '/dashboard/concursos', 
+      icon: '🎯',
+      active: pathname === '/dashboard/concursos'
+    },
+    { 
+      name: 'Simulados', 
+      href: '/dashboard/simulados', 
+      icon: '📝',
+      active: pathname === '/dashboard/simulados'
+    },
+    { 
+      name: 'Relatórios', 
+      href: '/dashboard/relatorios', 
+      icon: '📈',
+      active: pathname === '/dashboard/relatorios'
+    },
+    { 
+      name: 'Perfil', 
+      href: '/dashboard/perfil', 
+      icon: '👤',
+      active: pathname === '/dashboard/perfil'
+    },
+    { 
+      name: 'Configurações', 
+      href: '/dashboard/configuracoes', 
+      icon: '⚙️',
+      active: pathname === '/dashboard/configuracoes'
+    }
+  ];
 
   const [stats, setStats] = useState({
     totalStudyTime: '127h 45min',
@@ -47,57 +102,142 @@ export default function DashboardPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header Premium */}
-      <header className="bg-black/20 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center space-x-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      {/* Sidebar */}
+      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 w-72 bg-black/30 backdrop-blur-xl border-r border-white/10 transition-transform duration-300 ease-in-out`}>
+        <div className="flex flex-col h-full">
+          {/* Logo Section */}
+          <div className="p-6 border-b border-white/10">
+            <div className="flex items-center space-x-3">
               <div className="relative">
                 <Logo size="sm" />
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  Dashboard
+                <h1 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  Papiro Tático
                 </h1>
-                <p className="text-sm text-gray-400">Sistema de Controle de Estudos</p>
+                <p className="text-xs text-gray-400">Dashboard</p>
               </div>
             </div>
-            
-            <div className="flex items-center space-x-6">
-              {/* Notifications */}
-              <div className="relative">
-                <button className="p-2 text-gray-400 hover:text-white transition-colors">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-              </div>
+          </div>
 
-              {/* User Profile */}
-              <div className="flex items-center space-x-4">
-                <div className="text-right">
-                  <p className="text-sm font-medium text-white">{user.name}</p>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs text-gray-400">{user.plan}</span>
-                    <div className="w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
-                  </div>
+          {/* User Profile Section */}
+          <div className="p-6 border-b border-white/10">
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-white text-lg font-bold">{user.avatar}</span>
                 </div>
-                <div className="relative">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                    <span className="text-white text-lg font-bold">{user.avatar}</span>
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-900"></div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-900"></div>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-white">{user.name}</p>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs text-gray-400">{user.plan}</span>
+                  <div className="w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Navigation Menu */}
+          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
+                  item.active
+                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-white'
+                    : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                }`}
+              >
+                <span className="text-xl">{item.icon}</span>
+                <span className="font-medium">{item.name}</span>
+                {item.active && (
+                  <div className="ml-auto w-2 h-2 bg-blue-500 rounded-full"></div>
+                )}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Bottom Section */}
+          <div className="p-4 border-t border-white/10 space-y-2">
+            {/* Notifications */}
+            <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200">
+              <div className="relative">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+              </div>
+              <span className="font-medium">Notificações</span>
+            </button>
+
+            {/* Logout */}
+            <button className="w-full flex items-center space-x-3 px-4 py-3 text-red-400 hover:bg-red-500/20 hover:text-red-300 rounded-xl transition-all duration-200">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              <span className="font-medium">Sair</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Top Header */}
+        <header className="bg-black/20 backdrop-blur-xl border-b border-white/10 lg:border-l border-white/10">
+          <div className="px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+
+              {/* Page Title */}
+              <div className="flex-1 lg:flex-none">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  Dashboard
+                </h2>
+                <p className="text-sm text-gray-400">Visão geral do seu progresso</p>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="flex items-center space-x-4">
+                <button className="p-2 text-gray-400 hover:text-white transition-colors">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+                <button className="p-2 text-gray-400 hover:text-white transition-colors">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content Area */}
+        <main className="flex-1 overflow-y-auto">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Welcome */}
         <div className="mb-12">
           <div className="flex items-center justify-between">
@@ -325,54 +465,28 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Quick Actions */}
+            {/* Quick Stats */}
             <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Ações Rápidas</h3>
-              <div className="space-y-3">
-                <Link href="/dashboard/cronograma">
-                  <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 border-0">
-                    📅 Ver Cronograma
-                  </Button>
-                </Link>
-                <Link href="/dashboard/progresso">
-                  <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-0">
-                    📊 Análise de Progresso
-                  </Button>
-                </Link>
-                <Link href="/dashboard/concursos">
-                  <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 border-0">
-                    🎯 Meus Concursos
-                  </Button>
-                </Link>
-                <Link href="/dashboard/relatorios">
-                  <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-0">
-                    📈 Relatórios
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Profile Actions */}
-            <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Conta</h3>
-              <div className="space-y-3">
-                <Link href="/dashboard/perfil">
-                  <Button className="w-full" variant="outline">
-                    👤 Meu Perfil
-                  </Button>
-                </Link>
-                <Link href="/dashboard/configuracoes">
-                  <Button className="w-full" variant="outline">
-                    ⚙️ Configurações
-                  </Button>
-                </Link>
-                <Button className="w-full bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30">
-                  🚪 Sair
-                </Button>
+              <h3 className="text-xl font-bold text-white mb-4">Resumo Rápido</h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-300 text-sm">Streak Atual</span>
+                  <span className="text-white font-bold">{stats.streak} dias</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-300 text-sm">Eficiência</span>
+                  <span className="text-white font-bold">{stats.efficiency}%</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-300 text-sm">Precisão</span>
+                  <span className="text-white font-bold">{stats.accuracy}%</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+        </main>
       </div>
     </div>
   );
